@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="LSOjY8xjNxVzmY56iuYf">
+    <mxGraphModel dx="766" dy="552" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="G6_Q0Y_c91-dufhBjbDN-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;direction=south;" value="array B" vertex="1">
+          <mxGeometry height="60" width="60" x="440" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="G6_Q0Y_c91-dufhBjbDN-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;direction=south;" value="array A" vertex="1">
+          <mxGeometry height="60" width="60" x="280" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="G6_Q0Y_c91-dufhBjbDN-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;direction=south;" value="vstack() o&lt;div&gt;concatenate(..., axis=0)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="220" x="280" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="G6_Q0Y_c91-dufhBjbDN-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;direction=south;" value="array A" vertex="1">
+          <mxGeometry height="60" width="60" x="360" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="G6_Q0Y_c91-dufhBjbDN-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;direction=south;" value="array B" vertex="1">
+          <mxGeometry height="60" width="60" x="360" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="G6_Q0Y_c91-dufhBjbDN-6" edge="1" parent="1" source="G6_Q0Y_c91-dufhBjbDN-3" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=0;startArrow=classicThin;startFill=1;" target="G6_Q0Y_c91-dufhBjbDN-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="510" y="300" as="sourcePoint" />
+            <mxPoint x="460" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="G6_Q0Y_c91-dufhBjbDN-7" edge="1" parent="1" source="G6_Q0Y_c91-dufhBjbDN-3" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=0;startArrow=classicThin;startFill=1;" target="G6_Q0Y_c91-dufhBjbDN-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="510" y="300" as="sourcePoint" />
+            <mxPoint x="460" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="G6_Q0Y_c91-dufhBjbDN-8" edge="1" parent="1" source="G6_Q0Y_c91-dufhBjbDN-4" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=0;startArrow=classicThin;startFill=1;" target="G6_Q0Y_c91-dufhBjbDN-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="510" y="300" as="sourcePoint" />
+            <mxPoint x="460" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

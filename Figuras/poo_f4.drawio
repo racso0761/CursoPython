@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36">
+  <diagram name="Página-1" id="dLJTj5QH-F4ueE-Wm2cr">
+    <mxGraphModel dx="766" dy="552" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oi3XcOMsNagL_3dvIH6m-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="170" width="390" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="oi3XcOMsNagL_3dvIH6m-15" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" value="Nombre de la Clase" vertex="1">
+          <mxGeometry height="30" width="210" x="30" y="28.5" as="geometry" />
+        </mxCell>
+        <mxCell id="oi3XcOMsNagL_3dvIH6m-16" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" value="Interface de la Clase" vertex="1">
+          <mxGeometry height="30" width="210" x="30" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="a5RPgUlSExZALokrsLlE-5" parent="1" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Forma&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ color&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ tamaño&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ area&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ dibujar()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ borrar()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ rotar ()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ mover()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="153" width="160" x="240" y="28.5" as="geometry" />
+        </mxCell>
+        <mxCell id="a5RPgUlSExZALokrsLlE-6" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" value="Atributos de la clase" vertex="1">
+          <mxGeometry height="30" width="210" x="30" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a5RPgUlSExZALokrsLlE-7" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" value="(métodos)" vertex="1">
+          <mxGeometry height="30" width="100" x="70" y="151.5" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
