@@ -1,0 +1,2985 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Unidad 7: Tipos de Datos Definidos por el Usuario\n",
+    "\n",
+    "En esta Unidad se estudiarán las características de la *programación orientada a objetos* que posee Python, que utiliza tipos de datos definidos por el usuario para organizar tanto código como datos."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "La Programación Orientada a Objetos (POO) es un nuevo modo de pensar (paradigma) en cómo resolver algunos aspectos de los sistemas de software. Básicamente, *se examina el problema a resolver como un conjunto de entidades independientes que se relacionan entre sí y con otras partes del problema para proporcionar una solución*. Estas entidades son denominadas <span style=\"color:magenta\">objetos</span> en los programas, y así, en un lenguaje orientado a objetos, tal como el <span style=\"color:magenta\">C++</span> o <span style=\"color:magenta\">Python</span>, el centro del lenguaje no son las funciones ni los datos, sino más bien las entidades (objetos) que trabajan en forma conjunta para lograr la solución. Construir un programa orientado a objetos implica determinar aquellos objetos que son necesarios para resolver el problema (estos constituyen el dominio del problema), y luego, estos objetos serán capaces de interactuar entre sí y ser utilizados para construir los cálculos, operaciones y procesos que definen el comportamiento del sistema de software.\n",
+    "\n",
+    "## Programación Orientada a Objetos\n",
+    "\n",
+    "Superficialmente el término <span style=\"color:magenta\">Orientado a Objetos</span> significa organizar un sistema de software como un conjunto de objetos del mundo real, que reúnen datos (variables o atributos) y funciones (comportamientos) en un única unidad lógica y operativa. Esto es completamente opuesto a lo que proclama la programación convencional, en la cual, los datos y el comportamiento están débilmente conectados."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Los Objetos\n",
+    "\n",
+    "La pregunta que se debe hacer es: Que es un objeto? La respuesta es simple: Un objeto es una representación simple o compleja, real o imaginaria de alguna cosa. Desde el punto de vista de un lenguaje orientado a objetos un <span style=\"color:magenta\">objeto</span> es una forma de agrupar un <span style=\"color:magenta\">conjunto de datos o atributos (estado)</span> y <span style=\"color:magenta\">comportamientos (funcionalidad)</span> en un mismo bloque de código que se puede referenciar desde otras partes de un programa.\n",
+    "\n",
+    "En un sistema, los datos están contenidos en entidades discretas perfectamente distinguibles llamadas objetos. Un objeto es la representación sistémica de la abstracción de un conjunto de cosas del mundo real, y que tiene sentido en el problema analizado. Por ejemplo, en un <span style=\"color:magenta\">sistema de Punto de Venta</span> (como una caja de un supermercado) los <span style=\"color:magenta\">objetos</span> participantes del problema podrían ser instancias específicas de <span style=\"color:magenta\">Facturas, Productos, Tarjetas de Crédito, Efectivo, Almacén de Stock</span>, etc.\n",
+    "\n",
+    "Todo objeto contiene una identidad, un estado interno (estructura de datos) y métodos (operaciones que definen el comportamiento), como se observa en la figura.\n",
+    "\n",
+    "![](./Figuras/poo_f1.png)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "+ <span style=\"color:magenta\">Una identidad</span> que lo identifica del resto de los objetos del mismo tipo.\n",
+    "\n",
+    "+ <span style=\"color:magenta\">Una estructura de datos</span> que define su estado interno, denominados <span style=\"color:magenta\">atributos</span>.\n",
+    "\n",
+    "+ <span style=\"color:magenta\">Un conjunto de operaciones</span> que definen su comportamiento, materializadas por funciones denominadas <span style=\"color:magenta\">métodos</span>. Se suele expresar que estos comportamientos se manifiestan por medio de un <span style=\"color:magenta\">conjunto de mensajes que el objeto es capaz de responder</span>.\n",
+    "\n",
+    "De lo anterior, podemos concluir lo siguiente:\n",
+    "\n",
+    "+ <span style=\"color:magenta\">El objeto es una entidad que tiene un cierto comportamiento</span>: Cuando se piensa en un objeto, se tiene que preguntar: ¿Para que sirve? ¿Qué comportamientos tiene? ¿Qué se le puede pedir? ¿Que servicios proporciona? ¿Qué sabe hacer el objeto?. Esta visión de entender al objeto con cierta capacidad de hacer cosas es bastante compleja de asimilar pues se tiende a pensar que los procesos son activos, y que las cosas son pasivas, mientras que en el paradigma de objetos, los que saben hacer algo son los objetos. La idea de entender a los objetos como entidades con comportamientos es la idea central del paradigma de objetos. (Ejemplos de objetos pueden ser: una cuenta bancaria, los clientes del banco, un archivo de datos, una factura, un libro).\n",
+    "\n",
+    "+ <span style=\"color:magenta\">El comportamiento está expresado por el conjunto de mensajes que el objeto es capaz de responder</span>: Cuando un objeto recibe un mensaje (se le pide que haga algo), ejecuta una sección de código contenida en una función que se denomina genéricamente método. Lo importante es que este es un código muy procedural (se parece mucho a lo que es un método o función de la programación estructurada) que se activa cada vez que uno de los objetos recibe un mensaje que tiene su interfase (la interfase de un objeto esta definida por el conjunto de mensajes que puede recibir y ejecutar con sus métodos).\n",
+    "\n",
+    "+ <span style=\"color:magenta\">El estado interno</span>: los objetos tienen un estado interno que en términos de implementación está formado por variables (llamadas atributos) y que capturan lo que ese objeto conoce (el conocimiento del objeto), guardan las características individuales que diferencian a un objeto de otro y determinan su apariencia o estado.\n",
+    "\n",
+    "+ <span style=\"color:magenta\">Cada objeto tiene identidad propia</span>. En efecto, dos objetos son distintos aún si todos los valores de sus atributos son idénticos. Por ejemplo: dos alumnos pueden tener el mismo nombre y apellido pero son dos personas distintas. Dos autos pueden ser del mismo modelo y color, tener características idénticas respecto al tipo de motor pero aún así son autos distintos. En la vida real un objeto simplemente existe, pero en un lenguaje de programación, tiene un único identificador por medio del cual puede ser únicamente referenciado o accedido. El identificador puede ser implementado de varias formas: una dirección, un índice de arreglo o bien por medio del valor de un atributo.\n",
+    "\n",
+    "Los objetos con la misma estructura de datos (atributos) y comportamientos (operaciones o métodos) disponen de un <span style=\"color:yellow\">molde (plantilla)</span> que permite crearlos según ese patrón, y este molde se denomina <span style=\"color:yellow\">clase</span>. Suele decirse que las clases agrupan los objetos del mismo tipo, pero esto no es cierto: \"Las clases solo son plantillas para construir objetos que tienen una estructura de datos y comportamientos predeterminados\". \n",
+    "\n",
+    "Cada clase describe, posiblemente, un conjunto infinito de objetos individuales que comparten la \"forma\" que la plantilla (clase) le provee. Cada objeto construído usando esa plantilla se dice que es una <span style=\"color:magenta\">instancia de su clase</span>, y cada instancia de una clase tiene un valor propio para cada atributo, pero comparten los nombres de los mismos y los nombres de las operaciones con otras instancias de la misma clase.\n",
+    "\n",
+    "Por ejemplo: \n",
+    "En una empresa, el administrador y los obreros trabajan, ambos tienen datos personales (estructura de datos común) y también trabajan para la misma empresa, además cobran un sueldo, hacen aportes (comportamiento común). Cada uno de ellos son objetos del dominio del problema y como comparten la estructura de datos y comportamientos, se los puede modelar mediante una plantilla (clase) llamada ```Empleado```. Así, el administrador y cada uno de los obreros son instancias de la clase Empleado (han sido creados usando la plantilla Empleado)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Pilares Fundamentales de la Programación Orientada a Objetos\n",
+    "\n",
+    "Los pilares sobre los que se basa el paradigma de la Programación Orientada a Objetos (POO) son:  <span style=\"color:magenta\">la abstracción y encapsulamiento</span>, <span style=\"color:magenta\">la herencia</span> y el <span style=\"color:magenta\">polimorfismo</span>.\n",
+    "\n",
+    "### Abstracción y Encapsulamiento\n",
+    "\n",
+    "La <span style=\"color:magenta\">abstracción</span> es la especificación de ciertos aspectos esenciales de un sistema para un propósito particular, y su función es aislar los aspectos que son importantes dejando de lado aquellos que no lo son. La abstracción debe servir para algún propósito, porque ese propósito determina lo que es y lo que no es importante.\n",
+    "\n",
+    "Un objeto tiene un estado interno y un comportamiento. Ese estado interno está <span style=\"color:magenta\">encapsulado</span>, y esto significa que no hay forma de acceder a los atributos de un objeto desde el exterior del mismo, lo único que se puede hacer es enviarle mensajes al objeto para que en su respuesta entregue los valores de sus atributos. Cualquier cambio que ocurra en el estado interno de un objeto es producto de la ejecución de uno de sus métodos. \n",
+    "\n",
+    "La abstracción y el encapsulamiento son conceptos complementarios: \n",
+    "\n",
+    "+ La abstracción pone énfasis en la vista externa del objeto y \n",
+    "\n",
+    "+ El encapsulamiento (ocultamiento de la información) previene a los usuarios de acceder al estado interno del objeto directamente, donde se implementa el comportamiento de la abstracción.\n",
+    "\n",
+    "#### Abstracción\n",
+    "\n",
+    "La <span style=\"color:magenta\">abstracción</span> es la propiedad que considera los aspectos más significativos o notables de un problema y expresa una solución en esos términos. La abstracción posee diversos grados o niveles de abstracción, los cuales ayudan a estructurar la complejidad intrínseca que poseen los sistemas del mundo real.\n",
+    "\n",
+    "En el análisis hay que concentrarse en <span style=\"color:magenta\">¿Qué hace un objeto?</span> y no en <span style=\"color:magenta\">¿Cómo lo hace?</span>.\n",
+    "\n",
+    "El principio de abstracción es más fácil de entender con una analogía del mundo real, por ejemplo, la televisión. Todos estamos familiarizados con sus características y su manejo manual o con el control remoto (encender, apagar, subir volumen, etc.) incluso sabemos cómo conectarlo con otros aparatos externos como altavoces o reproductores, o al internet. Sin embargo, no todos sabemos cómo funciona internamente, es decir, en como recibe la señal, en como la traduce y la visualiza en la pantalla, etc.\n",
+    "\n",
+    "Normalmente sucederá que no sepamos cómo funciona el aparato de televisión pero si sabemos cómo utilizarlo. Esta característica se debe a que la televisión separa claramente su <span style=\"color:magenta\">implementación interna</span> de su <span style=\"color:magenta\">interfaz externa</span>. Interactuamos con la televisión a través de su <span style=\"color:magenta\">interfaz</span>: los botones de encendido, cambio de canal, volumen, etc. no conocemos el tipo de tecnología que utiliza, el método de generar la imagen en la pantalla o como funciona internamente, es decir, su implementación, ya que ello no afecta a su interfaz.\n",
+    "\n",
+    "#### Encapsulamiento\n",
+    "\n",
+    "El <span style=\"color:magenta\">encapsulamiento</span> hace referencia a reunir en una cierta estructura a todos los elementos que a un cierto nivel de abstracción se pueden considerar pertenecientes a una misma entidad, y es el proceso de agrupamiento de datos y operaciones relacionadas bajo una misma unidad de programación, lo que permite aumentar la cohesión de los componentes del sistema.\n",
+    "\n",
+    "El encapsulamiento oculta lo que hace un objeto de lo que hacen otros objetos y también del mundo exterior por lo que se denomina también ocultación de datos. Un objeto tiene que presentar “una cara” (interfaz) al mundo exterior de modo que se puedan iniciar sus operaciones.\n",
+    "\n",
+    "Por ejemplo, la televisión tiene un conjunto de botones para encender, apagar y/o cambiar canal. Una lavadora tiene un conjunto de mandos e indicadores que establecen la temperatura, el nivel de agua, etc. Los botones de la televisión y la lavadora constituyen la comunicación con el mundo interior, es decir son las interfaces.\n",
+    "\n",
+    "La interfaz de una clase representa un <span style=\"color:yellow\">“contrato”</span> de prestación de servicios entre ella y los demás componentes del sistema. De este modo, los clientes solo necesitan conocer los servicios que este ofrece y no como están implementados internamente. Por consiguiente, se puede modificar la implementación de una clase sin afectar a las restantes relacionadas con ella.\n",
+    "\n",
+    "**Reglas de Visibilidad**\n",
+    "\n",
+    "Las reglas de visibilidad complementan o refinan el concepto de encapsulamiento. Los diferentes niveles de visibilidad dependen del lenguaje de programación con el que se trabaje, pero en general siguen el modelo de <span style=\"color:magenta\">C++</span>, estos niveles de visibilidad son:\n",
+    "\n",
+    "+ El nivel más fuerte se denomina nivel <span style=\"color:magenta\">“privado”</span>; la sección privada de una clase es totalmente invisible para otras clases, solo miembros de la misma clase pueden acceder a atributos localizados en la sección privada.\n",
+    "\n",
+    "+ Es posible aliviar el nivel de ocultamiento situando algunos atributos en la sección <span style=\"color:magenta\">“protegida”</span> de la clase. Estos atributos son visibles tanto para la misma clase como para las clases derivadas. Para las restantes clases permanecen invisibles.\n",
+    "\n",
+    "+ El nivel más débil se obtiene situando los atributos en la sección <span style=\"color:magenta\">“pública”</span> de la clase con lo cual se hacen visibles a todas las clases.\n",
+    "\n",
+    "Los atributos privados están contenidos en el interior de la clase ocultos a cualquier otra clase. Ya que los atributos están encapsulados dentro de una clase, se necesitará definir cuáles son las clases que tienen acceso a visualizar y cambiar los atributos. Esta característica se conoce como visibilidad de los atributos. En general se recomienda visibilidad privada o protegida para los mismos.\n",
+    "\n",
+    "**Modificadores de Acceso**\n",
+    "\n",
+    "Los modificadores de acceso se utilizan para definir la visibilidad de los miembros de una clase (atributos y métodos) y de la propia clase. En los lenguajes de programación orientados a objetos existen 3 modificadores de acceso:\n",
+    "\n",
+    "+ <span style=\"color:magenta\">Visibilidad pública</span>\n",
+    "+ <span style=\"color:magenta\">Visibilidad protegida </span>\n",
+    "+ <span style=\"color:magenta\">Visibilidad privada</span>\n",
+    "\n",
+    "Un principio fundamental en la programación orientada a objetos es la ocultación de la información, que significa que determinados datos del interior de una clase no pueden ser accedidos por funciones externas a la clase, esto sugiere que solamente la información sobre lo que puede hacer una clase debe estar visible desde el exterior, pero no cómo lo hace. \n",
+    "\n",
+    "Esto tiene una gran ventaja: si ninguna otra clase conoce cómo está almacenada la información entonces se puede cambiar fácilmente la forma de almacenarla sin afectar otras clases."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Herencia\n",
+    "\n",
+    "En la programación orientada a objetos, la <span style=\"color:magenta\">herencia</span> está en todos lados, de hecho, se podría decir que es casi imposible escribir el más pequeño de los programas sin utilizar herencia. Todas las clases que se crean dentro de la mayoría de los lenguajes de programación orientados a objetos heredan implícitamente de la clase <span style=\"color:limegreen\">Object</span> y, por ende, se pueden comportar como objetos (que es la base del paradigma).\n",
+    "\n",
+    "En el mundo real existen entidades similares con propiedades comunes; y con el fin de reducir la redundancia al implementar estas diferentes entidades similares entre sí, el enfoque Orientado a Objetos introdujo un nuevo concepto: la herencia, que es compartir atributos y métodos entre clases, pero respetando una dependencia jerárquica. Esto permite que una clase, llamada <span style=\"color:magenta\">superclase (clase base o clase padre)</span>, sea definida en forma general y luego ser refinada sucesivamente en otras clases – que dependen jerárquicamente de ellas - llamadas <span style=\"color:magenta\">subclases (clases derivadas o clases hijas)</span>. Las subclases heredan la mayoría de las propiedades de sus superclases y a la vez agregan sus propiedades específicas. La herencia es una de las características principales de la POO.\n",
+    "\n",
+    "La relación <span style=\"color:yellow\">is-a (es un)</span> se basa en la herencia y permite afirmar que un objeto es de un tipo (clase) en específico.\n",
+    "\n",
+    "Un ejemplo puede ser el de las figuras geométricas: ```triángulo```, ```rectángulo``` o ```círculo```, tal vez usado en un sistema de diseño asistido por computadora o juegos de simulación. Todas estas figuras tienen un ```tamaño```, una ```posición``` y un ```color```. Además, las figuras se ```dibujan```, se ```desplazan en el espacio```, y se ```rotan```, tienen un comportamiento similar. Podemos pensar que el tipo base es ```figura```, y cada figura tiene un ```tamaño```, un ```color```, una ```posición``` y así sucesivamente. Cada ```figura``` se puede ```dibujar```, ```borrar```, ```mover```, ```colorear```, etc. A partir de ahí, los tipos específicos de figuras derivan (heredan) de ella: ```círculo```, ```rectangulo```, ```triángulo```, y así sucesivamente, cada uno de ellos pueden tener características y comportamientos adicionales. Ciertas figuras pueden ser, por ejemplo, rotadas. Algunos comportamientos pueden ser diferentes, como cuando se quiere calcular el área de una figura. La jerarquía de tipos expresa las similitudes y las diferencias entre las figuras.\n",
+    "\n",
+    "Basados en esto, podemos pensar en la siguiente jerarquía de clases (ver Figura).\n",
+    "\n",
+    "![](./Figuras/poo_f2.png)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Cuando se hereda de una clase existente, se está creando una clase nueva. Esta nueva clase contiene no sólo todos los miembros de la clase base (aunque los datos privados están ocultos e inaccesibles), sino que además, y lo que es más importante, hereda la interfaz de la clase base. Es decir, todos los mensajes que se pueden enviar a los objetos de la clase base se pueden enviar también a los objetos de la clase derivada. Dado que se conoce el tipo de una clase por los mensajes que se le pueden enviar, eso significa que la clase derivada es del mismo tipo que la clase base. En el ejemplo anterior, \"un círculo <span style=\"color:magenta\">es una</span> figura\". Esta equivalencia de tipos vía herencia es uno de las claves fundamentales para comprender la POO.\n",
+    "\n",
+    "Se debe tener en cuenta que una clase se puede derivar de mas de una clase base, dando lugar a la <span style=\"color:magenta\">herencia múltiple</span>. Esta es una característica que no todos los lenguajes de programación orientados a objetos disponen. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Polimorfismo\n",
+    "\n",
+    "Las subclases también heredan de sus superclases la mayoría de sus operaciones, sin embargo, estas operaciones pueden ser redefinidas para que se ejecuten de manera diferente de acuerdo a la naturaleza de cada subclase. Es decir que una misma operación se puede comportar de forma diferente en clases distintas. Esta característica fundamental de la orientación a objetos, se denomina <span style=\"color:magenta\">polimorfismo</span> (muchas formas), y permite a una misma interfaz ser usada para una clase general de acciones.\n",
+    "\n",
+    "Por ejemplo, la función ```dibujar()``` se debe comportar de diferente manera para graficar un círculo, un rectángulo o un triángulo. Entonces, cada figura sobrescribirá esa función heredada de la superclase para ajustarla a sus propias necesidades, de manera tal que se podrá invocar el método ```dibujar()``` de cualquier objeto ```Figura``` y siempre se dibujará la \"figura correcta\" (ver Figura).\n",
+    "\n",
+    "![](./Figuras/poo_f3.png)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "El Polimorfismo, junto con la Herencia, son las características más importantes de la POO y permiten que objetos que tienen estructuras internas diferentes compartan la misma interfaz externa. Proveen una interfaz de software genérico de manera que un conjunto de tipos diferentes de objetos puedan ser manejados uniformemente. El lenguaje <span style=\"color:magenta\">C++</span> por ejemplo, provee tres tipos de Polimorfismo: funciones virtuales, sobrecarga de nombre de funciones y sobrecarga de operadores, si bien el verdadero polimorfismo se manifiesta solo en el uso de la funciones virtuales."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Otras Características de la POO\n",
+    "\n",
+    "### Composición y Agregación\n",
+    "\n",
+    "Una clase puede tener referencias a objetos de otras clases como miembros. A dicha capacidad se le conoce como composición ó agregación y algunas veces como relación <span style=\"color:yellow\">has-a (tiene un)</span>.\n",
+    "\n",
+    "El concepto de composición ó agregación no fue creado para la programación; suele usarse a menudo para objetos complejos en el mundo real. Toda criatura viviente y la mayor parte de los productos manufacturados están constituidos por partes. A menudo, cada parte es un subsistema que está integrado por su propio conjunto de subpartes. Junto, todo el sistema forma una jerarquía de composición ó agregación.\n",
+    "\n",
+    "Por ejemplo, el cuerpo humano está compuesto por varios órganos: cerebro, corazón, estómago, huesos, músculos, etc. A su vez, cada uno de estos órganos está compuesto por muchas células, y cada una de estas células está compuesta por muchos orgánulos, como el núcleo y las mitocondrias. Cada orgánulo está compuesto por muchas moléculas. Y finalmente, cada molécula orgánica está compuesta por muchos átomos.\n",
+    "\n",
+    "En una jerarquía de composición (así como en una jerarquía de agregación), la relación entre una clase contenedora y una de sus clases parte se denomina relación has-a (tiene un). Por ejemplo, cada cuerpo humano tiene un cerebro y tiene un corazón.\n",
+    "\n",
+    "La composición y la agregación es una forma de reutilización de software, en donde una clase tiene como miembros referencias a objetos de otras clases.\n",
+    "\n",
+    "La diferencia entre una composición y una agregación depende del contexto en el que se use la relación. Pero, en la literatura normalmente se hace referencia a que la diferencia entre agregación y composición es que en el caso de la agregación la parte tiene sentido sin el todo y en el caso de la composición no lo tiene.\n",
+    "\n",
+    "Esta definición es un poco ambigua y se debe decir que el concepto que hace de parte debe considerarse dentro del contexto que se está tratando. Dentro de ese contexto se debe determinar si el objeto tiene sentido de forma independiente.\n",
+    "Por ejemplo, el objeto palabra en el contexto de un diccionario es una agregación pero en el contexto de una frase es una composición."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Ventajas del Desarrollo Orientado a Objetos\n",
+    "\n",
+    "El desarrollo orientado a objetos (DOO) no solo permite que la información sea compartida en una aplicación, sino que ofrece la posibilidad de reutilizar el diseño y código para proyectos futuros. El DOO provee las herramientas para facilitar la reusabilidad tales como la abstracción, el encapsulamiento y la herencia.\n",
+    "\n",
+    "La orientación a objetos no es una fórmula mágica para asegurar la reusabilidad. La reusabilidad no sucede sino que debe ser planificada más allá de la aplicación inmediata e invirtiendo un esfuerzo extra en un diseño más general.\n",
+    "\n",
+    "En el DOO, el principal beneficio no es reducir tiempo de desarrollo. El DOO puede tomar más tiempo que el desarrollo convencional, pues se intenta promover una futura reusabilidad y reducir errores y tiempo de mantenimiento. El tiempo hasta que el código se complete, probablemente es el mismo o quizás mayor, sin embargo, las iteraciones subsecuentes de un DOO son más rápidas y fáciles que con el desarrollo estructurado convencional porque las revisiones son más localizadas. \n",
+    "\n",
+    "Los sistemas orientados a objetos son más resistentes a los cambios y pueden desarrollarse y mantenerse mejor porque su diseño es estable.\n",
+    "\n",
+    "La POO no es un lenguaje, sino una filosofía de análisis y diseño, y puede llevarse a cabo en varios lenguajes diferentes. No hay que confundir las limitaciones de cualquier lenguaje con la POO: esta es fundamentalmente una nueva forma de pensar y no una técnica de programación.\n",
+    "\n",
+    "Construir un programa usando POO involucra determinar los objetos que son necesarios para resolver el problema. Luego, los objetos son usados para construir las operaciones que definen el comportamiento del sistema de software. El paso de mensajes es el mecanismo fundamental entre objetos; un mensaje (desde otro objeto) se envía a otro objeto para que ejecute una de sus operaciones. Los mensajes que se pueden enviar a un objeto están definidos en la interfaz de ese objeto. Solamente el objeto puede modificar su estado interno. Es decir, la construcción fundamental son los objetos, todos los cálculos se hacen dentro de los objetos, y no hay ningún tipo de código fuera de los mismos.\n",
+    "\n",
+    "Muchos de los conceptos nombrados como <span style=\"color:magenta\">mensaje</span>, <span style=\"color:magenta\">método</span>, <span style=\"color:magenta\">polimorfismo</span>, <span style=\"color:magenta\">herencia</span> eran conocidos anteriormente, pero en el enfoque orientado a objetos son diferentes, un mensaje no es lo mismo que una llamada a una función, y herencia no es lo mismo que copiar y pegar código."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Uso de la POO y Python\n",
+    "\n",
+    "Luego de la breve revisión anterior de las generalidades referidas a la Programación Orientados a Objetos ( POO) es importante destacar que los contenidos referidos a estos temas y dictados en este curso están fuertemente limitados por motivos de tiempo y de formación previa de los estudiantes. Esto es así por cuanto la POO son nuevas formas de pensar un sistema de software, y su asimilación exige un tiempo y una dedicación que no está disponible en esta etapa. \n",
+    "\n",
+    "Sin embargo, en cursos futuros o en la vida profesional surgirá la necesidad de utilizar bibliotecas de componentes Orientados a Objetos en diferentes Lenguajes como C++ o Python, para construir sistemas de software con necesidades específicas, e integrarlos a los conocimientos y construcciones ya aprendidas.\n",
+    "\n",
+    "Por este motivo, se dará la formación básica necesaria para aplicar, enlazar y construir sistemas de software que utilicen entidades Orientadas a Objetos que proporcionan las habilidades requeridas por la aplicación bajo desarrollo. \n",
+    "\n",
+    "En este contexto, nos limitaremos a conocer los mecanismos de instanciación de objetos de clases ya existentes y nos centraremos en la integración de estos componentes por medio del mecanismo de “intercambio de mensajes” (invocación de métodos), de manera muy similar al uso de bibliotecas de funciones que ya conocemos. Pero debe quedar claro que no se aprenderá a analizar, ni a diseñar ni a construir objetos de software orientado a objetos, dejando pendiente este proceso para etapas posteriores en la evolución de cada uno de ustedes."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Bibliotecas de Componentes Orientadas a Objetos\n",
+    "\n",
+    "En la actualidad, tanto las empresas como la comunidad Open Source han desarrollado numerosas bibliotecas de código Python que resuelven una enorme porción de los problemas más comúnmente encontrados en Ingeniería. Existen innumerables ejemplos de estas bibliotecas para el apoyo a las tareas de los ingenieros, encontrándose entre ellas.\n",
+    "\n",
+    "### OpenCV\n",
+    "\n",
+    "OpenCV es una poderosa biblioteca de funciones y objetos destinados a facilitar la aplicación de algoritmos muy avanzados para el proceso de visión por medio de computadoras. Esta biblioteca está orientada a aplicaciones de tiempo-real y está diseñada de forma tal de lograr la máxima eficiencia computacional de los algoritmos. Esta biblioteca tiene interfaces en C, C++, y Python si bien esta última permite un desarrollo mucho más claro y simple. Esta biblioteca es completamente gratuita y está disponible bajo Licencia Open Source BSD.\n",
+    "\n",
+    "### NumPy\n",
+    "\n",
+    "NumPy es una biblioteca de Python muy popular que se utiliza principalmente para realizar cálculos matemáticos y científicos. Ofrece muchas funciones y herramientas que pueden ser útiles para todo tipo de proyectos. Familiarizarse con NumPy es un paso esencial en un proyecto de formación.\n",
+    "\n",
+    "Es una biblioteca de código abierto en lenguaje Python. Se utiliza para la programación científica y, en particular, para la programación en Ciencia de Datos, Ingeniería, Matemáticas o la ciencia en general."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Pandas\n",
+    "\n",
+    "Pandas es una biblioteca de software escrita para el lenguaje de programación Python para la manipulación y el análisis de datos. En concreto, ofrece estructuras de datos y operaciones para manipular tablas numéricas y series temporales. Se trata de software libre liberado bajo la licencia BSD. El nombre deriva del término \"panel data\", un término econométrico para conjuntos de datos que incluyen observaciones durante múltiples periodos de tiempo para los mismos individuos. \n",
+    "\n",
+    "Las principales características de esta biblioteca son:\n",
+    "\n",
+    "+ Define nuevas estructuras de datos basadas en los arrays de la biblioteca NumPy pero con nuevas funcionalidades.\n",
+    "\n",
+    "+ Permite leer y escribir fácilmente archivos en formato CSV, Excel y bases de datos SQL.\n",
+    "\n",
+    "+ Permite acceder a los datos mediante índices o nombres para filas y columnas.\n",
+    "\n",
+    "+ Ofrece métodos para reordenar, dividir y combinar conjuntos de datos.\n",
+    "\n",
+    "+ Permite trabajar con series temporales.\n",
+    "\n",
+    "+ Realiza todas estas operaciones de manera eficiente.\n",
+    "\n",
+    "### Matplotlib\n",
+    "\n",
+    "Matplotlib es una biblioteca de gráficos para el lenguaje de programación Python y utiliza la biblioteca NumPy. Proporciona una API orientada a objetos para incrustar gráficos en aplicaciones que utilizan herramientas de interfaz gráfica de propósito general como Tkinter, wxPython, Qt o GTK. También existe una interfaz procedimental \"pylab\" basada en una máquina de estados (como OpenGL), diseñada para parecerse mucho a la de MATLAB, aunque se desaconseja su uso. SciPy hace uso de Matplotlib.\n",
+    "\n",
+    "Matplotlib fue escrito originalmente por John D. Hunter. Desde entonces ha tenido una activa comunidad de desarrollo y se distribuye bajo una licencia de tipo BSD. Matplotlib es un proyecto patrocinado fiscalmente por NumFOCUS."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### SciPy\n",
+    "\n",
+    "SciPy es una biblioteca libre y de código abierto para Python. Se compone de herramientas y algoritmos matemáticos. SciPy contiene módulos para optimización, álgebra lineal, integración, interpolación, funciones especiales, FFT, procesamiento de señales y de imagen, resolución de ODEs y otras tareas para la ciencia e ingeniería.\n",
+    "\n",
+    "SciPy se basa en el objeto matriz NumPy y es parte del conjunto NumPy, que incluye herramientas como Matplotlib, Pandas y SymPy, y un conjunto en expansión de bibliotecas de computación científica. Este conjunto está dirigido al mismo tipo de usuarios que los de aplicaciones como MATLAB, GNU Octave, y Scilab. A veces también se hace referencia a este conjunto de herramientas y bibliotecas como SciPy.1\n",
+    "\n",
+    "### Tensorflow\n",
+    "\n",
+    "Para el desarrollo de la inteligencia artificial y el aprendizaje automático, TensorFlow juega un papel muy importante. Se trata de una librería de código libre para Machine Learning (ML). Fue desarrollado por Google para satisfacer las necesidades a partir de redes neuronales artificiales. TensorFlow te permite construir y entrenar redes neuronales para detectar patrones y razonamientos usados por los seres humanos.\n",
+    "\n",
+    "Además de trabajar con redes neuronales, TensorFlow es multiplataforma. Trabaja con GPUs y CPUs e incluso con las unidades de procesamiento de tensores (TPUs).\n",
+    "\n",
+    "### Keras\n",
+    "\n",
+    "Por otra parte el Deep Learning (DL), también como conocido en español como aprendizaje profundo, es un subcampo del Machine Learning. Python dispone de la biblioteca denominada Keras muy reconocida dentro del mundo de las redes neuronales para su uso en Deep Learning. Su principal características es que es una biblioteca de código abierto y trabaja con TensorFlow, razón por la que es una de las más empleadas en el análisis de redes neuronales profundas o convolucionales.\n",
+    "\n",
+    "### Seaborn\n",
+    "\n",
+    "Seaborn es una librería gráfica de Python especializada en la visualización de datos estadísticos. Dentro de sus principales características, podemos destacar su interfaz de alto nivel, la cual es atractiva y muy interactiva. \n",
+    "\n",
+    "Este aspecto resulta fundamental cuando llega el momento de esclarecer los datos luego de un análisis, pues hace que la visualización de los mismos sea más sencilla. Asimismo, es compatible con otras librerías de Python como Pandas y Matplotlib. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Presentación y Uso de los elementos de una Clase\n",
+    "\n",
+    "Una clase es un nuevo tipo de datos que usted o alguna otra persona crea para resolver un problema particular. Una vez que se ha creado una clase, cualquiera puede utilizarla sin conocer los detalles de su funcionamiento, o incluso de la forma en que se han construido. Se va hacer uso de las clases como si sólo fueran otro tipo de datos predefinido disponible para su uso en programas. Las clases creadas por terceras personas se suelen empaquetar en bibliotecas.\n",
+    "\n",
+    "Los objetos idénticos, exceptuando su estado durante la ejecución del programa, se agrupan en clases de objetos y de ahí viene la palabra reservada <span style=\"color:limegreen\">class</span>. Crear tipos de datos abstractos (clases) es un concepto fundamental en la programación orientada a objetos. Los tipos de datos abstractos (clases) trabajan casi exactamente como tipos predefinidos: puede crear variables de un tipo (llamadas objetos o instancias) y manipular estas variables (llamado envío de mensajes o peticiones; envía un mensaje y el objeto decide qué hacer con él).\n",
+    "\n",
+    "Por eso, lo que hace realmente un programa orientado a objetos es crear nuevos tipos de datos, prácticamente todos los lenguajes de programación orientados a objetos usan la palabra reservada <span style=\"color:limegreen\">class</span>. Cuando vea la palabra <span style=\"color:limegreen\">class</span>, piense en <span style=\"color:limegreen\">type</span> y viceversa. Pero, ¿cómo se consigue que un objeto haga algo, como utilizar objetos? Debe haber una forma de hacer una petición al objeto para que haga algo, como completar una operación, dibujar algo en la pantalla, etc. Y cada objeto puede satisfacer sólo ciertas peticiones. Las peticiones a las que puede responder un objeto están definidas por su intefaz, y es el tipo lo que determina la interfaz.\n",
+    "\n",
+    "La interfaz establece qué peticiones se pueden hacer a un objeto particular. Sin embargo, se debe codificar en algún sitio para satisfacer esta petición. Ésta, junto con los datos ocultos, constituyen la implementación. Desde el punto de vista de la programación procedural, no es complicado. Una clase tiene una función asociada para cada posible petición, y cuando se hace una petición particular a un objeto, se llama a esa función. Este proceso normalmente se resume diciendo que se ha <span style=\"color:magenta\">enviado un mensaje</span> (se ha hecho una petición) a un objeto, y el objeto sabe qué hacer con este mensaje (ejecuta código). Cada clase se representa con una caja, con el nombre de la clase en la parte superior, los atributos que necesite describir en la parte central de la caja, y los métodos (las funciones o comportamientos que pertenecen a este objeto, que reciben cualquier mensaje que se envíe al objeto) en la parte inferior de la caja (ver Figura).\n",
+    "\n",
+    "![](./Figuras/poo_f4.png)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "En la Figura anterior, el nombre de la clase es ```Figura```, el nombre de un objeto particular de ```Figura``` puede ser ```figu1```, y las peticiones que se le pueden hacer a un objeto ```Figura``` son ```dibujar```, ```mover```, ```rotar```. Puede crear un objeto ```Figura``` declarando un nombre (```figu1```) para ese objeto. Para enviar un mensaje al objeto, escriba el nombre del objeto y conéctelo al mensaje de petición con un punto. Desde el punto de vista del usuario de una clase predefinida, eso es prácticamente todo lo que necesita para programar con objetos.\n",
+    "\n",
+    "Declaramos objetos de una clase de la misma manera que declaramos las variables de tipos básicos. Las siguientes sentencias declaran dos objetos de la clase ```Figura```:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Figura:\n",
+    "    def dibujar():\n",
+    "        pass"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "figu1 = Figura # Declara figu1 del tipo Figura \n",
+    "figu2 = Figura # Declara figu2 del tipo Figura\n",
+    "\n",
+    "figu1.dibujar() # invoca el metodo de la clase"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "En Python el concepto de inicialización y limpieza es esencial para facilitar el uso de las bibliotecas y eliminar muchos de los errores sutiles que ocurren cuando el programador que usa esas bibliotecas olvida cumplir con sus actividades. Si recordamos que los objetos son el \"equivalente en software\" de las cosas que nos rodean en el mundo cotidiano, es bastante simple entender el por qué de la necesidad de que algo o alguien se encargue de dar, a los atributos del objeto, los valores iniciales que se requieren para poder enfrentar su ciclo de vida.\n",
+    "\n",
+    "Toda clase correctamente diseñada dispone de un grupo de elementos fundamentales que hacen a su funcionalidad y operación básica. El principal de ellos es un método muy particular que se denomina Constructor de la Clase (o simplemente constructor) y su función es inicializar los atributos propios de cada objeto en el momento que se crea. El constructor de Python permite garantizar que los atributos de su nuevo tipo de datos (\"objetos de su clase\") siempre se inicializarán correctamente.\n",
+    "\n",
+    "En Python, el nombre del constructor es <span style=\"color:limegreen\">\\_\\_init\\_\\_</span> y es invocado automáticamente en la inicialización.\n",
+    "\n",
+    "Como cualquier función, el constructor puede tomar argumentos que permitan especificar cómo ha de crearse el objeto, dados unos valores iniciales. Los argumentos del constructor son una especie de garantía de que todas las partes del objeto se inicializan con valores apropiados. La tarea del constructor es asignar a los atributos internos de cada objeto los valores iniciales adecuados.\n",
+    "\n",
+    "Por ejemplo, si la clase <span style=\"color:limegreen\">Figura</span> tiene un constructor que toma como argumento tres parámetros, un string que se refiere al color de la figura y dos valores enteros que se refieren a la posición <span style=\"color:limegreen\">x</span> e <span style=\"color:limegreen\">y</span> del plano respectivamente, entonces para crear un objeto <span style=\"color:limegreen\">figu</span> se hace:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Instanciar un objeto figu con color rojo, en la posicion x=10 e y= 20 \n",
+    "figu = Figura('Rojo', 10, 20)\n",
+    "..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Pensar en Objetos\n",
+    "\n",
+    "+ Pensar en objetos, puede resultar una tarea difícil al principio. \n",
+    "\n",
+    "+ En Python todo es un “objeto” y debe ser entendido como tal. \n",
+    "\n",
+    "### ¿Qué es un objeto? ¿De qué se habla cuando se hace referencia a \"orientación a objetos?\"\n",
+    "\n",
+    "+ Un objeto es *una cosa*. Y, si una cosa es un sustantivo, entonces un objeto es un **sustantivo**.\n",
+    "\n",
+    "+ Si se mira alrededor se encontrarán decenas, cientos de objetos.\n",
+    "\n",
+    "    + La computadora, es un objeto.\n",
+    "\n",
+    "    + Usted es un objeto.\n",
+    "\n",
+    "    + Una llave es un objeto.\n",
+    "\n",
+    "    + El mate, es otro objeto.\n",
+    "    \n",
+    "    + Una mascota también es un objeto.\n",
+    "\n",
+    "Entonces hay que pensar toda la vida en objetos."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Cualidades de un Objeto\n",
+    "\n",
+    "+ Describir un objeto, es simplemente mencionar sus cualidades, sus *atributos*. \n",
+    "\n",
+    "+ Las cualidades son **adjetivos**.\n",
+    "\n",
+    "+ Para describir “la manera de ser” de un objeto, debemos preguntarnos ¿cómo es el objeto?\n",
+    "\n",
+    "    + Toda respuesta que comience por *...el objeto es...*, seguida de un adjetivo, será una cualidad del objeto.\n",
+    "\n",
+    "    + Por ejemplo:\n",
+    "\n",
+    "        + El objeto es de color amarillo\n",
+    "\n",
+    "        + El objeto es de tamaño grande\n",
+    "        \n",
+    "        + El objeto es de aspecto elegante"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Objetos formado por otros Objetos\n",
+    "\n",
+    "+ Además de cualidades, los objetos *poseen otras cosas*.\n",
+    "\n",
+    "+ Son aquellas *pseudo-cualidades* que en vez de responder a la pregunta ¿cómo es el objeto? responden a la pregunta “¿cómo está compuesto el objeto?” o “¿Qué tiene el objeto?”.\n",
+    "\n",
+    "+ La respuesta a esta pregunta, estará dada por la frase “...el objeto tiene ...”, seguida de un **adverbio** de cantidad (uno, varios, muchos, algunos, unas cuantas) y un **sustantivo**.\n",
+    "\n",
+    "    + El objeto tiene algunos *asientos*\n",
+    "\n",
+    "    + El objeto tiene un *motor*\n",
+    "\n",
+    "    + El objeto tiene unas cuantas *ventanas*\n",
+    "\n",
+    "+ En el ejemplo, *asientos*, *motor*, *ventanas* son sustantivos que representan objetos contenidos dentro de un objeto, denominados *atributo-objeto* y responden a la pregunta ¿Como es/son ese/esas/esos objeto/s? seguido del atributo-objeto.\n",
+    "\n",
+    "+ Por ejemplo:\n",
+    "\n",
+    "    + El objeto tiene algunos asientos. ¿Como son esos asientos?\n",
+    "\n",
+    "        + Los asientos son de color negro\n",
+    "\n",
+    "        + Los asientos son de gran tamaño\n",
+    "\n",
+    "    + El objeto tiene un motor. ¿Como es ese motor?\n",
+    "\n",
+    "        + El motor es de gran potencia\n",
+    "\n",
+    "        + El motor es de muchos cilindros\n",
+    "\n",
+    "        + El motor es de combustión\n",
+    "\n",
+    "    + El objeto tiene unas cuantas ventanas. ¿Como son esas ventanas?\n",
+    "\n",
+    "        + Las ventanas son de color transparente\n",
+    "\n",
+    "        + Las ventanas son medianas\n",
+    "\n",
+    "+ Entonces se pueden resumir los *atributos* de la siguiente manera:\n",
+    "\n",
+    "    + Los que responden a la pregunta ¿Como es el objeto? con la frase *\"El objeto es...\" + adjetivo* (atributos definidos por cualidades).\n",
+    "\n",
+    "    + Los que responden a la pregunta ¿Que tiene el objeto? con la frase *\"El objeto tiene...\" + sustantivo* (atributos definidos por las cualidades de otro objeto).\n",
+    "    \n",
+    "\n",
+    "![Atributos de un objeto](./Figuras/Clase_2n.png)\n",
+    "\n",
+    "En el gráfico anterior, se observa lo siguiente: \n",
+    "\n",
+    "+ Un objeto (sustantivo) al cual se la ha descrito con tres atributos (adjetivos) y\n",
+    "\n",
+    "+ otros tres atributos-objeto (sustantivos) los cuáles son a la vez, otros tres objetos (sustantivos) con sus atributos (adjetivos) correspondientes.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Objetos que comparten Características con Objetos\n",
+    "\n",
+    "+ Suponga que un objeto, es prácticamente igual a un nuevo objeto. Es decir, que el nuevo objeto tiene absolutamente todas las características del primer objeto, es decir, tiene los mismos atributos.\n",
+    "\n",
+    "+ Pero también, tiene algunos más. Por ejemplo, este nuevo objeto, tiene algunas *ruedas*. Es decir, que las características de nuestro nuevo objeto, serán todas las del objeto original, más una nueva: *ruedas*.\n",
+    "\n",
+    "+ Ejemplo:\n",
+    "\n",
+    "    + El nuevo objeto es de color amarillo.\n",
+    "\n",
+    "    + El nuevo objeto es de tamaño grande.\n",
+    "\n",
+    "    + El nuevo objeto es de aspecto elegante.\n",
+    "\n",
+    "    + El nuevo objeto tiene algunos asientos ¿Cómo son esas asientos?\n",
+    "\n",
+    "        + Los asientos son de color negro\n",
+    "\n",
+    "        + Los asientos son de gran tamaño\n",
+    "    \n",
+    "    + El nuevo objeto tiene un motor. ¿Como es ese motor?\n",
+    "\n",
+    "        + El motor es de gran potencia\n",
+    "\n",
+    "        + El motor es de muchos cilindros\n",
+    "\n",
+    "        + El motor es de combustión\n",
+    "\n",
+    "    + El nuevo objeto tiene unas cuantas ventanas. ¿Como son esas ventanas?\n",
+    "\n",
+    "        + Las ventanas son de color transparente\n",
+    "\n",
+    "        + Las ventanas son medianas\n",
+    "    \n",
+    "    (nuevas características)\n",
+    "    + El nuevo objeto tiene algunas ruedas. ¿Cómo son esas ruedas?\n",
+    "\n",
+    "        + Las ruedas son anchas\n",
+    "\n",
+    "        + Las ruedas son de color negro\n",
+    "\n",
+    "        + Las ruedas son con tornillos. ¿Cómo son esos tornillos?\n",
+    "\n",
+    "            + Los tornillos son largos\n",
+    "            \n",
+    "            + Los tornillos poseen rosca en milimetros\n",
+    "            \n",
+    "![Atributos-herencia](./Figuras/Clase_3n.png)\n",
+    "\n",
+    "Se observa que el nuevo objeto es una especie de “objeto original ampliado”. \n",
+    "\n",
+    "Es decir que el nuevo objeto, es exactamente igual al objeto original (comparte todos sus atributos) pero posee nuevas características.\n",
+    "\n",
+    "Además, el objeto original y el nuevo objeto, son dos objetos diferentes. No obstante, el nuevo objeto es un sub-tipo del objeto original (se deriva de ...)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Los Objetos pueden Hacer Cosas\n",
+    "\n",
+    "+ Los objetos “pueden hacer cosas”, es decir los objetos tienen, *\"capacidades\"* o *comportamientos*.\n",
+    "\n",
+    "+ Los objetos tiene la capacidad de realizar acciones.\n",
+    "\n",
+    "    + Las acciones, son *verbos*. Es decir responden a la pregunta “¿Qué puede hacer el objeto?” y la respuesta a esta pregunta, comienza por la frase *“...el objeto puede...” + verbo* en infinitivo.\n",
+    "\n",
+    "+ Por ejemplo:\n",
+    "\n",
+    "    + El objeto original puede *arrancar*\n",
+    "\n",
+    "    + El nuevo objeto se puede *mover*\n",
+    "\n",
+    "\n",
+    "> En el gráfico, se nota que el nuevo objeto, no solo tiene los mismos atributos que el objeto original, sino que además puede realizar las mismas acciones que éste.\n",
+    "\n",
+    "### Extrapolando\n",
+    "\n",
+    "Llevado todo a la Programación Orientada a Objetos (POO) se tiene que:\n",
+    "\n",
+    "*Cuando se dice...* | *POO* | *en la POO es*\n",
+    "---|---|---\n",
+    "objeto | **Objeto** (Encapsulamiento)| Un elemento\n",
+    "cualidad | **Atributo** | Un elemento\n",
+    "acción o comportamiento | **Método** | Un elemento\n",
+    "atributos-objeto | **Composición o Agregación** | Una técnica\n",
+    "atributos de igual nombre con valores diferentes | **Polimorfismo** | Una característica\n",
+    "objetos que comparten características y comportamientos | **Herencia** | Una característica"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Programación Orientada a Objetos\n",
+    "\n",
+    "+ La POO es un paradigma de programación:\n",
+    "\n",
+    "    + Teoría cuyo núcleo central suministra la base y el modelo para resolver problemas. (rae)\n",
+    "\n",
+    "\n",
+    "Es una metodología la cual se basa en las interacciones de objetos para resolver las necesidades de un sistema informático.\n",
+    "\n",
+    "### Elementos y Características de la POO\n",
+    "\n",
+    "+ Los *elementos* de la POO, pueden entenderse como los “materiales” que se necesitan para diseñar y programar un sistema.\n",
+    "\n",
+    "+ Las *características*, son las “herramientas” de las que se dispone para construir el sistema con esos materiales.\n",
+    "\n",
+    "+ Entre los elementos principales de la POO, se pueden encontrar a:\n",
+    "\n",
+    "    + Las Clases\n",
+    "\n",
+    "    + Los Objetos\n",
+    "\n",
+    "    + Los Atributos\n",
+    "\n",
+    "    + Los Métodos o Comportamientos\n",
+    "    \n",
+    "    + La Herencia\n",
+    "\n",
+    "    + El Polimorfismo\n",
+    "\n",
+    "    + Otros..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Las Clases\n",
+    "\n",
+    "+ La definición de un <span style=\"color:magenta\">clase</span> es el modelo sobre el cual se construirán los objetos.\n",
+    "\n",
+    "+ El nombre de las clases se define en singular utilizando <span style=\"color:magenta\">CamelCase</span> y se usan sustantivos."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 1\n",
+    "class Vehiculo:\n",
+    "    pass\n",
+    "\n",
+    "class Asiento:\n",
+    "    pass\n",
+    "\n",
+    "class Motor:\n",
+    "    pass\n",
+    "\n",
+    "class Ventana:\n",
+    "    pass"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Los Atributos\n",
+    "\n",
+    "+ Los atributos son las características intrínsecas del objeto. Éstas, se representan como variables, solo que técnicamente, pasan a denominarse <span style=\"color:magenta\">\"atributos\"</span>.\n",
+    "\n",
+    "+ Son locales al objeto\n",
+    "\n",
+    "+ Se pueden acceder directamente"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 2\n",
+    "# Atributos\n",
+    "class Saludo():\n",
+    "    def __init__(self, n):\n",
+    "        self.nombre = n\n",
+    "        print('Me han instanciado')\n",
+    "\n",
+    "    def __del__(self):\n",
+    "        print('Este es mi fin')\n",
+    "\n",
+    "    def saludar(self):\n",
+    "        print(f'Hola {self.nombre}. Como te va?')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "saludo = Saludo('Alberto')\n",
+    "saludo.saludar()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "saludo.nombre = 'Carla'\n",
+    "saludo.saludar()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "saludo.nombre ='Pepe'\n",
+    "print(saludo.nombre)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 3\n",
+    "class Asiento():\n",
+    "    def __init__(self, color):\n",
+    "        self.color = color\n",
+    "        self.material = ''\n",
+    "        self.tipo = ''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Motor():\n",
+    "    def __init__(self):\n",
+    "        self.potencia = 0\n",
+    "        self.combustion = ''\n",
+    "        self.tipo = ''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Ventana():\n",
+    "    def __init__(self):\n",
+    "        self.color = ''\n",
+    "        self.tamanio = ''\n",
+    "        self.accionamiento = '' "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Vehiculo():\n",
+    "    def __init__(self):\n",
+    "        self.color = ''\n",
+    "        self.largo = ''\n",
+    "        self.ancho = ''\n",
+    "        self.asientos = Asiento() # Atributo-objeto\n",
+    "        self.motor = Motor() # Atributo-objeto\n",
+    "        self.ventanas = Ventana() # Atributo-objeto"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "toyota = Vehiculo()\n",
+    "toyota.color = 'Rojo'\n",
+    "toyota.largo = 4.5\n",
+    "toyota.asientos.tipo="
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Los Métodos\n",
+    "\n",
+    "+ Los métodos son <span style=\"color:magenta\">\"funciones\" (acciones)</span>, que forman parte de la definición de la clase, solo que, técnicamente se denominan <span style=\"color:magenta\">métodos</span>, y representan acciones propias que puede realizar el objeto (y no otro).\n",
+    "\n",
+    "+ Pueden tener argumentos igual que una función, solo que siempre el primer argumento debe ser <span style=\"color:limegreen\">self</span> que hace referencia a si mismo.\n",
+    "\n",
+    "+ Normalmente se los identifica con <span style=\"color:magenta\">verbos</span>."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 4\n",
+    "class Asiento():\n",
+    "    def __init__(self, color):\n",
+    "        self.color = color\n",
+    "        self.material = ''\n",
+    "        self.tipo = ''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Motor():\n",
+    "    def __init__(self):\n",
+    "        self.potencia = 0\n",
+    "        self.combustion = ''\n",
+    "        self.tipo = ''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Ventana():\n",
+    "    def __init__(self):\n",
+    "        self.color = ''\n",
+    "        self.tamanio = ''\n",
+    "        self.accionamiento = '' "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Vehiculo():\n",
+    "    def __init__(self):\n",
+    "        self.color = ''\n",
+    "        self.largo = ''\n",
+    "        self.ancho = ''\n",
+    "        self.asientos = Asiento() # Atributo-objeto\n",
+    "        self.motor = Motor() # Atributo-objeto\n",
+    "        self.ventanas = Ventana() # Atributo-objeto\n",
+    "\n",
+    "    #define un método\n",
+    "    def arrancar(self):\n",
+    "        print(' He Arrancado')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Los Objetos\n",
+    "\n",
+    "+ Un <span style=\"color:magenta\">objeto</span> es una instancia de una clase y consiste en, asignar la clase como valor a una variable.\n",
+    "\n",
+    "+ Una vez creado el objeto, posee todos los atributos (propiedades) y métodos (comportamientos) definidos en la clase.\n",
+    "\n",
+    "+ Se instancia un objeto colocando el <span style=\"color:limegreen\">nombre = NombreClase()</span>."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 5\n",
+    "class Asiento():\n",
+    "    def __init__(self, color):\n",
+    "        self.color = color\n",
+    "        self.material = ''\n",
+    "        self.tipo = ''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Motor():\n",
+    "    def __init__(self):\n",
+    "        self.potencia = 0\n",
+    "        self.combustion = ''\n",
+    "        self.tipo = ''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Ventana():\n",
+    "    def __init__(self):\n",
+    "        self.color = ''\n",
+    "        self.tamanio = ''\n",
+    "        self.accionamiento = '' "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Vehiculo():\n",
+    "    def __init__(self):\n",
+    "        self.color = 'Amarillo'\n",
+    "        self.largo = 4\n",
+    "        self.ancho = 1.8\n",
+    "        self.asientos = Asiento('Negro') # Atributo-objeto\n",
+    "        self.motor = Motor() # Atributo-objeto\n",
+    "        self.ventanas = Ventana() # Atributo-objeto\n",
+    "\n",
+    "    #define un método\n",
+    "    def arrancar(self):\n",
+    "        print(' He Arrancado')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Instancia de una clase\n",
+    "moto = Vehiculo() # moto es un objeto de tipo Vehiculo\n",
+    "print(moto.color)\n",
+    "print(moto.largo)\n",
+    "print(moto.ancho)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.color = 'Rojo'\n",
+    "print(moto.color)\n",
+    "print(moto)\n",
+    "print(type(moto))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "automovil = Vehiculo() # automovil es otro objeto de tipo Vehiculo\n",
+    "print(automovil.color)\n",
+    "moto.arrancar()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Inicialización y Destrucción de Objetos\n",
+    "\n",
+    "**Inicialización (<span style=\"color:limegreen\">\\_\\_init\\_\\_</span>)**\n",
+    "\n",
+    "+ Existe un método especial que se ejecuta en el momento de la creación del objeto denominado <span style=\"color:limegreen\">\\_\\_init\\_\\_</span> (también llamado <span style=\"color:magenta\">constructor</span> de la clase).\n",
+    "\n",
+    "+ Este método puede recibir argumentos que le permiten a la clase darle valores iniciales a los atributos del objeto al momento de la instanciación.\n",
+    "\n",
+    "+ Siempre se le debe pasar el argumento <span style=\"color:limegreen\">self</span>.\n",
+    "\n",
+    "**Destrucción (<span style=\"color:limegreen\">\\_\\_del\\_\\_</span>)**\n",
+    "\n",
+    "+ Existe un método especial que tiene por función la eliminación de un objeto denominado <span style=\"color:limegreen\">\\_\\_del\\_\\_</span> (también llamado <span style=\"color:magenta\">destructor</span> del objeto)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 6\n",
+    "# Constructor y Destructor\n",
+    "\n",
+    "class Saludo():\n",
+    "    def __init__(self):\n",
+    "        print('Me han instanciado')\n",
+    "    \n",
+    "    def __del__(self):\n",
+    "        print('He sido destruido')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Instanciación de un objeto\n",
+    "saludar = Saludo()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 7\n",
+    "class Asiento():\n",
+    "    def __init__(self, color):\n",
+    "        self.color = color\n",
+    "        self.material = ''\n",
+    "        self.tipo = ''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Motor():\n",
+    "    def __init__(self):\n",
+    "        self.potencia = 0\n",
+    "        self.combustion = ''\n",
+    "        self.tipo = ''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Ventana():\n",
+    "    def __init__(self):\n",
+    "        self.color = ''\n",
+    "        self.tamanio = ''\n",
+    "        self.accionamiento = '' "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Vehiculo():\n",
+    "    def __init__(self, nombre, color):\n",
+    "        self.nombre = nombre\n",
+    "        self.color = color\n",
+    "        self.largo = 4\n",
+    "        self.ancho = 1.8\n",
+    "        self.asientos = Asiento('Negro') # Atributo-objeto\n",
+    "        self.motor = Motor() # Atributo-objeto\n",
+    "        self.ventanas = Ventana() # Atributo-objeto\n",
+    "        print(f'Soy {self.nombre} y he sido creado')\n",
+    "\n",
+    "    #define un método\n",
+    "    def arrancar(self):\n",
+    "        print('He Arrancado')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Instancia de una clase\n",
+    "moto = Vehiculo('Yamaha', 'Verde') # moto es un objeto de tipo Vehiculo\n",
+    "print(moto.color)\n",
+    "print(moto.largo)\n",
+    "print(moto.ancho)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.color = 'Rojo'\n",
+    "print(moto.color)\n",
+    "print(moto)\n",
+    "print(type(moto))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "automovil = Vehiculo('Argo', 'Blanco') # automovil es otro objeto de tipo Vehiculo\n",
+    "print(automovil.color)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.arrancar() # invocación de un método"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Encapsulamiento\n",
+    "\n",
+    "El <span style=\"color:magenta\">encapsulamiento</span> en POO es un concepto que hace referencia al ocultamiento de los estados internos de una clase hacia el exterior. \n",
+    "\n",
+    "Dicho de otra manera:\n",
+    "\n",
+    "+ Encapsular consiste en hacer que los atributos o métodos internos de una clase no se puedan acceder ni modificar desde fuera directamente, sino que se puedan hacer <span style=\"color:magenta\">solo por los servicios propuestos por el objeto (su interfaz)</span>.\n",
+    "\n",
+    "El encapsulamiento permite definir niveles de visibilidad para los elementos de la clase. Estos niveles de visibilidad definen los derechos de acceso a los datos en función de si se accede a ellos mediante un método de la propia clase, de una clase heredada o de cualquier otra clase. \n",
+    "\n",
+    "Hay cuatro niveles de visibilidad:\n",
+    "\n",
+    "+ <span style=\"color:magenta\">Visibilidad por defecto</span>: no se especifica ningún modificador de visibilidad.\n",
+    "\n",
+    "+ <span style=\"color:magenta\">Visibilidad pública</span>: los métodos de todas las clases pueden acceder a los atributos o métodos de una clase definida con el nivel de visibilidad «público». Este es el nivel más bajo de protección de datos.\n",
+    "\n",
+    "+ <span style=\"color:magenta\">Visibilidad protegida</span>: el acceso a los atributos está restringido a los métodos de las clases heredadas, es decir, de los métodos miembro de la clase y las clases derivadas. Así, un atributo o un método declarado «protegido» es accesible sólo por las clases de un paquete y a sus subclases, aunque estén definidas en un paquete diferente.\n",
+    "\n",
+    "+ <span style=\"color:magenta\">Visibilidad privada</span>: el acceso a los atributos se limita a los métodos de la propia clase. Este es el nivel más alto de protección de datos.\n",
+    "\n",
+    "Python por defecto <span style=\"color:red\">no oculta</span> los atributos y métodos de una clase."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 8\n",
+    "class Vehiculo():\n",
+    "    def __init__(self, nombre, color):\n",
+    "        self.nombre = nombre\n",
+    "        self.color = color \n",
+    "        self.largo = 2.4\n",
+    "        self.ancho = 1.2\n",
+    "        print(f'Soy {self.nombre} y he sido creado')\n",
+    "    \n",
+    "    #define un método\n",
+    "    def arrancar(self):\n",
+    "        print(f'Soy {self.nombre}, tengo color {self.color} y he Arrancado')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Soy Yamaha y he sido creado\n",
+      "Rojo\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Creación (instanciación) de un Objeto de tipo Vehículo\n",
+    "moto = Vehiculo('Yamaha', 'Rojo') \n",
+    "print(moto.color)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Largo: 2.4, Ancho: 1.2\n",
+      "Soy Yamaha, tengo color Rojo y he Arrancado\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f'Largo: {moto.largo}, Ancho: {moto.ancho}')\n",
+    "moto.arrancar() # invocación de un método"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.nombre = 'Honda' # acceso directo, no existe protección\n",
+    "print('Ahora el nombre es: ', moto.nombre)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.arrancar()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "+ La manera de hacer que un atributo o un método sea <span style=\"color:magenta\">privado</span> es anteponer al nombre un doble símbolo de subrayado.\n",
+    "\n",
+    "+ La manera de hacer que un atributo o un método sea <span style=\"color:magenta\">protegido</span> es anteponer al nombre un símbolo de subrayado.\n",
+    "\n",
+    "+ En realidad es un mecanismo engañoso ya que en realidad Python no posee niveles de protección y lo deja como responsabilidad del programador.\n",
+    "\n",
+    "+ Python usa <span style=\"color:magenta\">name mangling</span>: que consiste en modificar el nombre del atributo o método privado anteponiendole un símbolo de subrayado y el nombre de la clase. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 9\n",
+    "# Encapsulamiento o Abstracción\n",
+    "\n",
+    "class Saludo():\n",
+    "    def __init__(self, nombre: str, apellido: str):\n",
+    "        self._nombre = nombre\n",
+    "        self.__apellido = apellido\n",
+    "        print(f'Soy {self._nombre}, {self.__apellido} y me han instanciado')\n",
+    "\n",
+    "    def __del__(self):\n",
+    "        print('Este es mi fin')\n",
+    "\n",
+    "    def saludar(self):\n",
+    "        print(f'Hola {self._nombre} {self.__apellido}. Como estas?')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Soy Alberto, Ramírez y me han instanciado\n",
+      "Este es mi fin\n",
+      "Hola Alberto Ramírez. Como estas?\n"
+     ]
+    }
+   ],
+   "source": [
+    "saludo = Saludo('Alberto', 'Ramírez')\n",
+    "saludo.saludar()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Accediendo a un atributo protegido:  Alberto\n"
+     ]
+    },
+    {
+     "ename": "AttributeError",
+     "evalue": "'Saludo' object has no attribute '__apellido'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[18], line 2\u001b[0m\n\u001b[0;32m      1\u001b[0m \u001b[38;5;28mprint\u001b[39m(\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mAccediendo a un atributo protegido: \u001b[39m\u001b[38;5;124m'\u001b[39m, saludo\u001b[38;5;241m.\u001b[39m_nombre)\n\u001b[1;32m----> 2\u001b[0m \u001b[38;5;28mprint\u001b[39m(\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mAccediendo a un atributo privado: \u001b[39m\u001b[38;5;124m'\u001b[39m, \u001b[43msaludo\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43m__apellido\u001b[49m)\n",
+      "\u001b[1;31mAttributeError\u001b[0m: 'Saludo' object has no attribute '__apellido'"
+     ]
+    }
+   ],
+   "source": [
+    "print('Accediendo a un atributo protegido: ', saludo._nombre)\n",
+    "print('Accediendo a un atributo privado: ', saludo.__apellido)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Accediendo a un atributo privado desde el exterior:  Ramírez\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Trampa (Name Mangling)\n",
+    "print('Accediendo a un atributo privado desde el exterior: ', saludo._Saludo__apellido)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 10\n",
+    "class Vehiculo():\n",
+    "    def __init__(self, nombre, color):\n",
+    "        self.__nombre = nombre\n",
+    "        self.color = color \n",
+    "        self.largo = 4\n",
+    "        self.ancho = 1.8\n",
+    "        print(f'Soy {self.__nombre} y he sido creado')\n",
+    "    \n",
+    "    #define un método\n",
+    "    def __arrancar(self):\n",
+    "        print(f'Soy {self.__nombre}, tengo color {self.color} y he Arrancado')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Creación (instanciación) de un Objeto de tipo Vehiculo\n",
+    "automovil = Vehiculo('Honda', 'Azul') "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "automovil.__arrancar() # invocación de un método privado. Error"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Trampa (name mangling)\n",
+    "# Invocación a un método privado\n",
+    "automovil._Vehiculo__arrancar()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Acceso a un atributo privado\n",
+    "automovil._Vehiculo__nombre = 'Suzuki'\n",
+    "print(automovil._Vehiculo__nombre)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Atributos de Instancia vs Atributos de Clase\n",
+    "\n",
+    "La diferencia fundamental entre este tipo de atributos es que los <span style=\"color:magenta\">atributos de clase</span> son compartidos por todas las instancias de esa clase, mientras que los <span style=\"color:magenta\">atributos de instancia</span> son particulares para cada objeto creado con esa clase. Por tanto, las variables de instancia son para datos únicos y propios para cada objeto y las variables de clase son para atributos que deban ser compartidos por todas las instancias de esa clase.\n",
+    "\n",
+    "+ Los <span style=\"color:magenta\">atributos de instancia</span> son creados usando la sintaxis <span style=\"color:limegreen\">self.attr</span>. Como se ha dicho son locales para esa instancia y por tanto solo accesibles desde una de ellas. Es decir debe existir un objeto instanciado para acceder al atributo.\n",
+    "\n",
+    "    + En cuanto a su utilidad, genéricamente podemos decir que permiten definir un determinado \"estado\" de ese objeto particular y que lo diferencia de otros objetos de su clase. Como puede ser el atributo \"matrícula\" en una clase \"Automóvil\".\n",
+    "\n",
+    "    + Son almacenados en un diccionario (diccionario de instancia u objeto) al cual se puede acceder mediante <span style=\"color:limegreen\">NombreInstancia.\\_\\_dict\\_\\_</span>.\n",
+    "\n",
+    "+ Los <span style=\"color:magenta\">atributos de clase</span> se definen fuera de cualquier método de la clase, normalmente justo debajo del string de documentación.\n",
+    "\n",
+    "    + Se pueden referenciar directamente desde la clase, es decir no necesitan de un objeto instanciado.\n",
+    "\n",
+    "    + Se pueden referenciar desde cualquier instancia de la clase.\n",
+    "    \n",
+    "    + Se usan comunmente para establecer valores predeterminados para variables de instancia, definir constantes, etc.\n",
+    "\n",
+    "    + Son almacenados en un diccionario distinto (diccionario de clase) e independiente al usado para los atributos de instancia, el cual se puede consultar mediante <span style=\"color:limegreen\">NombreClase.\\_\\_dict\\_\\_</span> o desde una instancia con <span style=\"color:limegreen\">NombreInstancia.\\_\\_class\\_\\_.\\_\\_dict\\_\\_</span>.\n",
+    "\n",
+    "    + Al intentar asignar un nuevo objeto al atributo de clase usando *instancia.atributo* o desde un método de instancia vía <span style=\"color:limegreen\">self.atributo</span> no se modifica el atributo de clase, se crea un atributo de instancia con el mismo nombre y se le asigna el nuevo valor."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 11\n",
+    "class Vehiculo():\n",
+    "    identidad = 'Soy un Vehiculo' # Atributo de clase\n",
+    "    def __init__(self, nombre): # Constructor\n",
+    "        self.nombre = nombre # Atributo de instancia\n",
+    "\n",
+    "    # define un método\n",
+    "    def arrancar(self):\n",
+    "        print(f'Soy {self.nombre} y estoy funcionando')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Acceso desde la clase sin existencia de objeto\n",
+    "print(Vehiculo.identidad)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Instanciacion de objeto\n",
+    "moto = Vehiculo('Honda')\n",
+    "print(moto.nombre)\n",
+    "print(moto.identidad)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Instanciacion de otro objeto\n",
+    "automovil = Vehiculo('Ford')\n",
+    "print(automovil.nombre)\n",
+    "print(automovil.identidad)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Acceso y modificación de atributo de clase\n",
+    "Vehiculo.identidad = 'Soy un Vehiculo distinto'\n",
+    "print(automovil.identidad, '\\t', moto.identidad)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Modificacion de atributo de clase desde una instancia\n",
+    "automovil.identidad = 'Soy un Vehiculo de los costosos'\n",
+    "print(automovil.identidad, '\\t', moto.identidad)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(f'\\nDiccionario de instancia:\\n{automovil.__dict__}')\n",
+    "print(f'\\nDiccionario de clase:\\n{Vehiculo.__dict__}')\n",
+    "print(f'\\nDiccionario de clase a través de instancias:\\n{automovil.__class__.__dict__}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Métodos de Instancia vs Métodos de Clase\n",
+    "\n",
+    "+ Un <span style=\"color:magenta\">método de instancia</span> es un método que modifica o accede al estado del objeto al que hace referencia. Recibe <span style=\"color:limegreen\">self</span> como primer argumento, el cual se convierte en el propio objeto sobre el que se está trabajando.\n",
+    "\n",
+    "+ Un <span style=\"color:magenta\">método de clase</span> es un método que modifica o accede al estado de la clase a la que hace referencia. Recibe <span style=\"color:limegreen\">cls</span> como primer argumento, el cual se convierte en la propia clase sobre la que se está trabajando. La identificación de estos métodos se completa aplicando el decorador <span style=\"color:limegreen\">@classmethod</span>."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 12\n",
+    "class Vehiculo():\n",
+    "    contador = 0\n",
+    "    def __init__(self, nombre): # Constructor\n",
+    "        Vehiculo.contador += 1\n",
+    "        self.nombre = nombre # Atributo de instancia\n",
+    "\n",
+    "    # define un método de instancia\n",
+    "    def arrancar(self):\n",
+    "        print(f'Soy {self.nombre} y estoy funcionando')\n",
+    "\n",
+    "    @classmethod\n",
+    "    def cantidad_vehiculos(cls):\n",
+    "        print(f'{cls.contador} vehiculos creados hasta este momento!')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Creación de objetos\n",
+    "b1 = Vehiculo('Honda')\n",
+    "b2 = Vehiculo('Yamaha')\n",
+    "b1 = Vehiculo('Suzuki')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Vehiculo.cantidad_vehiculos()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "b1.contador = 100 # Se crea una variable de instancias\n",
+    "print(b1.contador)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(b2.contador)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "b1.arrancar()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Vehiculo.cantidad_vehiculos()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Métodos Estáticos\n",
+    "\n",
+    "+ Un <span style=\"color:magenta\">método estático</span> es un método que <span style=\"color:red\">no debería</span> modificar el estado del objeto ni de la clase. No recibe ningún argumento especial (ni <span style=\"color:limegreen\">self</span>, ni <span style=\"color:limegreen\">cls</span>). \n",
+    "\n",
+    "+ La identificación de estos métodos se completa aplicando el decorador <span style=\"color:limegreen\">@staticmethod</span> al método.\n",
+    "\n",
+    "Los métodos estáticos son útiles cuando se quiere definir una funcionalidad que pertenece a una clase pero que no depende de ningún atributo de instancia o de clase.\n",
+    "\n",
+    "A continuación, se presentan algunas situaciones en las que se pueden utilizar los métodos estáticos:\n",
+    "\n",
+    "+ Cuando se quiere implementar una funcionalidad que no depende de ningún atributo de la clase ni de una instancia en particular de la clase. Por ejemplo, un método que realiza una operación matemática simple, como calcular el valor absoluto de un número.\n",
+    "\n",
+    "+ Cuando se quiere proporcionar una función auxiliar que se utiliza en varias partes del programa y que no está específicamente relacionada con ninguna instancia de la clase. En este caso, se puede definir el método estático en la clase para tener una mejor organización del código.\n",
+    "\n",
+    "+ Cuando se quiere crear un método de la clase que no requiere acceso a ningún atributo de instancia ni de clase, pero que se relaciona con la lógica de la clase. Por ejemplo, se puede utilizar un método estático para crear una función de ayuda que comprueba la validez de un string de entrada en relación con la clase."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 13\n",
+    "class Vehiculo():\n",
+    "    contador = 0\n",
+    "    def __init__(self, nombre): # Constructor\n",
+    "        Vehiculo.contador += 1\n",
+    "        self.nombre = nombre # Atributo de instancia\n",
+    "\n",
+    "    # define un método de instancia\n",
+    "    def arrancar(self):\n",
+    "        print(f'Soy {self.nombre} y estoy funcionando')\n",
+    "\n",
+    "    @staticmethod\n",
+    "    def get_vehiculos_posibles():\n",
+    "        return ['moto', 'automovil', 'tren', 'avión', 'bicicleta', 'barco']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Vehiculo.get_vehiculos_posibles()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Métodos Decorados\n",
+    "\n",
+    "+ Es posible que, según el escenario, se requiera <span style=\"color:magenta\">decorar</span> ciertos métodos de una clase. \n",
+    "\n",
+    "+ Esto es posible siguiendo la misma estructura de <span style=\"color:magenta\">decoradores</span> que ya se ha estudiado, pero con ciertos matices.\n",
+    "\n",
+    "+ En el ejemplo siguiente se crea un decorador que audita las acciones de un objeto y saber que acción ha realizado."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 14\n",
+    "class Vehiculo():\n",
+    "    contador = 0\n",
+    "    def __init__(self, nombre): # Constructor\n",
+    "        Vehiculo.contador += 1\n",
+    "        self.nombre = nombre # Atributo de instancia\n",
+    "        self.pos = [0, 0] # Posicion inicial\n",
+    "\n",
+    "    @staticmethod\n",
+    "    def auditar(method):\n",
+    "        def wrapper(self, *args, **kwargs):\n",
+    "            print(f'Vehiculo {self.nombre} ejecutando {method.__name__}')\n",
+    "            return method(self, *args, **kwargs)\n",
+    "        return wrapper\n",
+    "    \n",
+    "    @auditar\n",
+    "    def mover(self, x, y):\n",
+    "        self.pos[0] += x\n",
+    "        self.pos[1] += y\n",
+    "    \n",
+    "    @auditar\n",
+    "    def reset(self):\n",
+    "        self.pos = [0, 0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto = Vehiculo('Honda')\n",
+    "moto.mover(10,10)\n",
+    "print(moto.pos)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.reset()\n",
+    "print(moto.pos)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Métodos Mágicos\n",
+    "\n",
+    "+ Cuando se escribe <span style=\"color:limegreen\">'hola mundo' * 3</span> ¿cómo sabe el objeto string <span style=\"color:limegreen\">'hola mundo'</span> lo que debe hacer para multiplicarse con el objeto entero 3? O dicho de otra forma, ¿cuál es la implementación del operador <span style=\"color:limegreen\">*</span> para <span style=\"color:limegreen\">string</span> e <span style=\"color:limegreen\">int</span>? En valores numéricos puede parecer evidente (siguiendo los operadores matemáticos), pero no es así para otros objetos. \n",
+    "\n",
+    "+ La solución que proporciona Python para estas (y otras) situaciones son los <span style=\"color:magenta\">métodos mágicos</span> también llamados [métodos especiales](https://docs.python.org/es/3/reference/datamodel.html#special-method-names).\n",
+    "\n",
+    "+ Los métodos mágicos comienzan y terminan por doble símbolo de subrayado (<span style=\"color:limegreen\">\\_\\_</span>). Uno de los métodos mágicos más importantes es el constructor de una clase: <span style=\"color:limegreen\">\\_\\_init\\_\\_()</span>.\n",
+    "\n",
+    "+ Existe un método mágico asociado a cada operador (que se puede personalizar). Por ejemplo la comparación de dos objetos se realiza con el método <span style=\"color:limegreen\">\\_\\_eq\\_\\_()</span>.\n",
+    "\n",
+    "![Metodos Especiales](./Figuras/Clases_metodosmagicos.png)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Caso particular: Sobrecarga de Operadores**\n",
+    "\n",
+    "+ La redefinición de operadores utilizando los métodos mágicos se denomina <span style=\"color:magenta\">sobrecarga de operadores</span>.\n",
+    "\n",
+    "+ Esto sirve para lograr que los operadores conocidos de Python funcionen de determinada forma con los objetos definidos por el usuario.\n",
+    "\n",
+    "+ Por ejemplo podemos sobrecargar el operador <span style=\"color:limegreen\">*</span>, <span style=\"color:limegreen\">+</span> , <span style=\"color:limegreen\">/</span>, etc, para hacer que realice una operación específica y deseada con los objetos que se están definiendo."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 15\n",
+    "# from __future__ import annotations\n",
+    "class Vehiculo():\n",
+    "    def __init__(self, nombre, color, cant_cilindros): # Constructor\n",
+    "        self.nombre = nombre # Atributo de instancia\n",
+    "        self.color = color\n",
+    "        self.cilindros = cant_cilindros\n",
+    "\n",
+    "    # define un método de instancia\n",
+    "    def arrancar(self):\n",
+    "        print(f'Soy {self.nombre} y estoy funcionando')\n",
+    "    \n",
+    "    def __eq__(self, otro):\n",
+    "        return self.nombre == otro.nombre\n",
+    "    \n",
+    "    def __add__(self, otro):\n",
+    "        n_nombre = self.nombre + '-' + otro.nombre\n",
+    "        n_color = self.color + otro.color\n",
+    "        n_cilindros = (self.cilindros + otro.cilindros) / 2.\n",
+    "        return Vehiculo(n_nombre, n_color, n_cilindros)\n",
+    "    \n",
+    "    def __str__(self):\n",
+    "        return f'Vehiculo Marca: {self.nombre}, Color: {self.color}, Cilindros: {self.cilindros}'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Creación de objetos\n",
+    "b1 = Vehiculo('VW_Amarok', 'Gris', 4)\n",
+    "b2 = Vehiculo('VW_Amarok', 'Rojo', 6)\n",
+    "b3 = Vehiculo('Ford_Ranger', 'Azul', 4)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "True\n",
+      "False\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Invocación a __eq__\n",
+    "print(b1 == b2)\n",
+    "#print(b1*b3)\n",
+    "print(b1.__eq__(b3))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "VW_Amarok-Ford_Ranger GrisAzul 4.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Invocación a __add__\n",
+    "b4 = b1 + b3\n",
+    "print(b4.nombre, b4.color, b4.cilindros)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Vehiculo Marca: VW_Amarok-Ford_Ranger, Color: GrisAzul, Cilindros: 4.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Invocación a __str__\n",
+    "print(b4)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Gestores de Contexto**\n",
+    "\n",
+    "+ Otra de las aplicaciones interesantes de los métodos mágicos es la de los <span style=\"color:magenta\">gestores de contexto</span>. \n",
+    "\n",
+    "+ Un gestor de contexto permite aplicar una serie de acciones a la entrada y a la salida del contexto definido.\n",
+    "\n",
+    "+ Hay dos métodos que son utilizados para implementar los gestores de contexto:\n",
+    "\n",
+    "    + <span style=\"color:limegreen\">\\_\\_enter\\_\\_()</span>: Acciones que se llevan a cabo al entrar al contexto.\n",
+    "\n",
+    "    + <span style=\"color:limegreen\">\\_\\_exit\\_\\_()</span>: Acciones que se llevan a cabo al salir del contexto."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 16\n",
+    "# Medición de tiempos de ejecución\n",
+    "from time import time\n",
+    "\n",
+    "class Timer():\n",
+    "    def __enter__(self):\n",
+    "        self.comienzo = time()\n",
+    "    \n",
+    "    def __exit__(self, tpo_ejec, valor_ejec, traza_ejec):\n",
+    "        # Omitir el gestor de la excepcion\n",
+    "        self.final = time()\n",
+    "        tpo_ejec = self.final - self.comienzo\n",
+    "        print(f'Tiempo de ejecución [seg]: {tpo_ejec:.5f}')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Definimos un contexto\n",
+    "with Timer():\n",
+    "    for _ in range(1_000_000):\n",
+    "        x = 2 ** 20"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Definimos otro contexto\n",
+    "with Timer():\n",
+    "    x = 0\n",
+    "    for _ in range(1_000_000):\n",
+    "        x += 2 ** 20"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Herencia\n",
+    "\n",
+    "+ La <span style=\"color:magenta\">herencia</span> permite generar una jerarquía de clases en las que se pueda compartir comportamientos y atributos comunes y en el que existirá una <span style=\"color:magenta\">clase padre</span> también conocida como <span style=\"color:magenta\">superclase</span> y una o varias clases <span style=\"color:magenta\">hijas</span> conocidas como <span style=\"color:magenta\">subclases</span>.\n",
+    "\n",
+    "+ Para derivar de una clase padre en Python solo se tiene que pasar como argumento el nombre de la clase padre en el momento de la definición de la clase hija y ya se pueden utilizar las funcionalidades de la clase padre.\n",
+    "\n",
+    "+ La Herencia es una de las características más importantes de la POO.\n",
+    "\n",
+    "![Herencia](./Figuras/Herencia_1.png)\n",
+    "\n",
+    "**Heredar desde una Clase Padre o Base**\n",
+    "\n",
+    "+ Para que una clase <span style=\"color:magenta\">herede (se derive)</span> de otra, basta con indicar la clase base o padre entre paréntesis en la definición de la clase derivada.\n",
+    "\n",
+    "+ En Python todos los objetos se derivan de una clase denominada <span style=\"color:limegreen\">object</span>."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 17\n",
+    "# Herencia\n",
+    "class Rectangulo:\n",
+    "    def __init__(self, base, altura):\n",
+    "        self.base = base\n",
+    "        self.altura = altura\n",
+    "\n",
+    "    def area(self):\n",
+    "        return self.base * self.altura"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Cuadrado(Rectangulo):\n",
+    "    def __init__(self, lado):\n",
+    "        super().__init__(lado, lado)\n",
+    "    #def area(self):\n",
+    "     #   return self.base*self.base\n",
+    "    def perimetro(self):\n",
+    "        return self.base*4"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Area rectangulo:  12\n",
+      "Area cuadrado:  25\n",
+      "5\n",
+      "20\n"
+     ]
+    }
+   ],
+   "source": [
+    "if __name__ == '__main__':\n",
+    "    rectangulo = Rectangulo(3, 4)\n",
+    "    print('Area rectangulo: ', rectangulo.area())\n",
+    "\n",
+    "    cuadrado = Cuadrado(5)\n",
+    "    print('Area cuadrado: ', cuadrado.area())\n",
+    "    \n",
+    "    print(cuadrado.base)\n",
+    "    print(cuadrado.perimetro())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 18\n",
+    "class Vehiculo:\n",
+    "    '''Clase Base'''\n",
+    "    def identificacion(self):\n",
+    "        print(\"Hola, Yo soy un Vehiculo\")\n",
+    "\n",
+    "class VehiculoTerrestre(Vehiculo):\n",
+    "    '''Clase derivada'''\n",
+    "    pass\n",
+    "\n",
+    "class VehiculoAereo(Vehiculo):\n",
+    "    '''Clase derivada'''\n",
+    "    pass"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "barco = Vehiculo()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "automovil = VehiculoTerrestre()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "barco.identificacion()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "automovil.identificacion() # metodo heredado de Vehiculo"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Sobreescribir un Método**\n",
+    "\n",
+    "+ Una clase derivada hereda todo lo que tiene su clase base.\n",
+    "\n",
+    "+ En ocasiones interesa modificar el comportamiento de esta herencia."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 19\n",
+    "class Vehiculo:\n",
+    "    '''Clase Base'''\n",
+    "    def identificacion(self):\n",
+    "        print(\"Hola, Yo soy un Vehiculo\")\n",
+    "    \n",
+    "\n",
+    "class VehiculoTerrestre(Vehiculo):\n",
+    "    '''Clase derivada'''\n",
+    "    def identificacion(self):\n",
+    "        print('Hola, Yo soy un Vehiculo Terrestre')\n",
+    "\n",
+    "class VehiculoAereo(Vehiculo):\n",
+    "    '''Clase derivada'''\n",
+    "    def identificacion(self):\n",
+    "        print('Hola, Yo soy un Vehiculo Aereo')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "barco = Vehiculo()\n",
+    "moto = VehiculoTerrestre()\n",
+    "avion = VehiculoAereo()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "barco.identificacion()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.identificacion() # metodo sobrescrito"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "avion.identificacion() # metodo sobrescrito"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Añadir un Método**\n",
+    "\n",
+    "La clase derivada puede, como cualquier otra clase «normal», añadir métodos que no forman parte de su clase base. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 20\n",
+    "class Vehiculo:\n",
+    "    '''Clase Base'''\n",
+    "    def identificacion(self):\n",
+    "        print(\"Hola, Yo soy un Vehiculo\")\n",
+    "\n",
+    "class VehiculoTerrestre(Vehiculo):\n",
+    "    '''Clase derivada'''\n",
+    "    def identificacion(self):\n",
+    "        print('Hola, Yo soy un Vehiculo Terrestre')\n",
+    "\n",
+    "class VehiculoAereo(Vehiculo):\n",
+    "    '''Clase derivada'''\n",
+    "    def identificacion(self):\n",
+    "        print('Hola, Yo soy un Vehiculo Aereo')\n",
+    "    def volar(self):\n",
+    "        print('Yo soy un Vehiculo Aereo y estoy volando!')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "barco = Vehiculo()\n",
+    "moto = VehiculoTerrestre()\n",
+    "avion = VehiculoAereo()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "barco.identificacion()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.identificacion()# metodo sobrescrito"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "avion.identificacion()\n",
+    "avion.volar()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Accediendo a la Clase Base**\n",
+    "\n",
+    "Puede darse la situación en la que se tenga que acceder desde la clase derivada a métodos o atributos de la clase base. Python ofrece el método <span style=\"color:limegreen\">super()</span> como mecanismo para ello."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 21\n",
+    "class Vehiculo:\n",
+    "    '''Clase Base'''\n",
+    "    def identificacion(self):\n",
+    "        print(\"Hola, Yo soy un Vehiculo\")\n",
+    "\n",
+    "class VehiculoTerrestre(Vehiculo):\n",
+    "    '''Clase derivada'''\n",
+    "    def identificacion(self):\n",
+    "        print('Hola, Yo soy un Vehiculo Terrestre')\n",
+    "\n",
+    "class VehiculoAereo(Vehiculo):\n",
+    "    '''Clase derivada'''\n",
+    "    def identificacion(self):\n",
+    "        print('Hola, Yo soy un Vehiculo Aereo')\n",
+    "    def volar(self):\n",
+    "        super().identificacion()\n",
+    "        print('Yo soy un Vehiculo Aereo y estoy volando!')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "barco = Vehiculo()\n",
+    "moto = VehiculoTerrestre()\n",
+    "avion = VehiculoAereo()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "barco.identificacion()\n",
+    "print('-----------')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "moto.identificacion()# metodo sobrescrito"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "avion.identificacion()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "avion.volar()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Herencia Múltiple\n",
+    "\n",
+    "+ Aunque no está disponible en todos los lenguajes de programación, Python sí permite heredar de múltiples clases base.\n",
+    "\n",
+    "+ Si en una clase se hace referencia a un método o atributo que no existe, Python lo buscará en todas sus clases base. Pero es posible que exista un conflicto en caso de que el método o el atributo buscado esté, a la vez, en varias clases base. En este caso, Python resuelve el conflicto a través del orden de resolución de métodos.\n",
+    "\n",
+    "+ Todas las clases en Python disponen de un método especial llamado <span style=\"color:limegreen\">mro() (\"method resolution order\")</span> que devuelve una lista de las clases que se visitarían en caso de acceder a un método o a un atributo:\n",
+    "\n",
+    "    + También se puede acceder a la misma información usando el atributo <span style=\"color:limegreen\">\\_\\_mro\\_\\_</span>.\n",
+    "\n",
+    "    + Todos los objetos en Python heredan, en primera instancia, de <span style=\"color:limegreen\">Object</span>. Esto se puede comprobar con el correspondiente <span style=\"color:limegreen\">mro()</span> de cada objeto."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 22\n",
+    "# Herencia Múltiple\n",
+    "class Nombre:\n",
+    "    def __init__(self, nombre):\n",
+    "        self._nombre = nombre\n",
+    "\n",
+    "class Apellido:\n",
+    "    def __init__(self, apellido):\n",
+    "        self._apellido = apellido\n",
+    "\n",
+    "class Saludo(Nombre, Apellido):\n",
+    "    def __init__(self, nombre: str, apellido: str, altura: float):\n",
+    "        Nombre.__init__(self, nombre)\n",
+    "        Apellido.__init__(self, apellido)\n",
+    "        self.altura = altura\n",
+    "\n",
+    "    def saludar(self):\n",
+    "        print(f'Hola {self._nombre} {self._apellido} con altura: {self.altura}')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "saludo = Saludo('Alberto', 'Ramírez', 1.8)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sal = Saludo('Carla', 'Gutierrez', 1.70)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "saludo.saludar()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sal.saludar()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Saludo.mro()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 23\n",
+    "class Persona:\n",
+    "    def bienvenida(self):\n",
+    "        return 'Aquí una persona'\n",
+    "\n",
+    "class Docente(Persona):\n",
+    "    def bienvenida(self):\n",
+    "        return 'Aquí un docente'\n",
+    "\n",
+    "class Estudiante(Persona):\n",
+    "    def bienvenida(self):\n",
+    "        return 'Aqui un estudiante'\n",
+    "\n",
+    "class CursoPosgrado(Docente, Estudiante):\n",
+    "    pass"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(issubclass(CursoPosgrado, (Docente, Estudiante)))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ci_py = CursoPosgrado()\n",
+    "print(ci_py.bienvenida())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(CursoPosgrado.mro())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Mixins**\n",
+    "\n",
+    "Hay situaciones en las que nos interesa incorporar una clase base «independiente» de la jerarquía establecida, y sólo a efectos de tareas auxiliares o transversales. Esta aproximación podría ayudar a evitar conflictos en métodos o atributos reduciendo la ambigüedad que añade la herencia múltiple. A estas clases auxiliares se las conoce como <span style=\"color:magenta\">mixins</span>."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Agregación y Composición**\n",
+    "\n",
+    "Aunque la herencia de clases nos permite modelar una gran cantidad de casos de uso en términos de <span style=\"color:yellow\">is-a (es un)</span>, existen muchas otras situaciones en las que la agregación o la composición son una mejor opción. En este caso una clase se compone de otras clases: hablamos de una relación <span style=\"color:yellow\">has a (tiene un)</span>.\n",
+    "\n",
+    "Hay una sutil diferencia entre agregación y composición:\n",
+    "+ La <span style=\"color:magenta\">composición</span> implica que el objeto utilizado no puede «funcionar» sin la presencia de su propietario.\n",
+    "+ La <span style=\"color:magenta\">agregación</span> implica que el objeto utilizado puede funcionar por sí mismo.\n",
+    "\n",
+    "![Agragacion vs Composición](./Figuras/agregacion_composicion.png)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 24\n",
+    "# Agregación\n",
+    "class Herramienta:\n",
+    "    def __init__(self, nombre):\n",
+    "        self.nombre = nombre\n",
+    "        \n",
+    "    def __str__(self):\n",
+    "        return self.nombre.upper()\n",
+    "\n",
+    "class Robot:\n",
+    "    def __init__(self, nombre, numero_serie, herramienta):\n",
+    "        self.nombre = nombre\n",
+    "        self.numero_serie = numero_serie\n",
+    "        self.herramienta = herramienta # agregación\n",
+    "        \n",
+    "    def __str__(self):\n",
+    "        return f'Robot {self.nombre} posee una {self.herramienta}'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linterna = Herramienta('Linterna')\n",
+    "bb8 = Robot('BB-8', 345654, linterna)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(bb8)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Iterables\n",
+    "\n",
+    "+ Un objeto en Python se dice iterable si implementa el protocolo de iteración. Este\n",
+    "protocolo permite «entregar» de a un valor cada vez en forma de secuencia.\n",
+    "\n",
+    "+ Hay muchos tipos de datos iterables en Python: <span style=\"color:magenta\">strings, listas, tuplas, conjuntos, diccionarios</span>, etc.\n",
+    "\n",
+    "+ Para ser un objeto iterable sólo es necesario implementar el método especial <span style=\"color:limegreen\">\\_\\_iter\\_\\_()</span>. Este método debe proporcionar una referencia al objeto iterador que es quien se encargará de desarrollar el protocolo de iteración a través del método especial <span style=\"color:limegreen\">\\_\\_next\\_\\_()</span>.\n",
+    "\n",
+    "![Protocolo de Iteración](./Figuras/Protocolo_iteracion.png)\n",
+    "\n",
+    "Cuando utilizamos un bucle <span style=\"color:limegreen\">for</span> para recorrer los elementos de un iterable, ocurren varias cosas:\n",
+    "\n",
+    "1. Se obtiene el objeto iterador del iterable.\n",
+    "\n",
+    "2. Se realizan invocaciones sucesivas al método <span style=\"color:limegreen\">\\_\\_next\\_\\_()</span> sobre dicho iterador para obtener cada elemento del iterable.\n",
+    "\n",
+    "3. Se detiene la iteración cuando el iterador dispara la excepción <span style=\"color:limegreen\">StopIteration</span>."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 25\n",
+    "class Robot:\n",
+    "    def __init__(self, numero_serie):\n",
+    "        self.numero_serie = numero_serie * 5 # por que si\n",
+    "        \n",
+    "    def __repr__(self):\n",
+    "        return f'Robot: SN={self.numero_serie}.'\n",
+    "\n",
+    "class Fabrica:\n",
+    "    def __init__(self, numero_robots):\n",
+    "        self.robots = [Robot(str(i)) for i in range(numero_robots)]\n",
+    "        self.numero_robots = numero_robots\n",
+    "        self.puntero = 0\n",
+    "    \n",
+    "    def __iter__(self):\n",
+    "        return self # El iterador es el propio objeto\n",
+    "    \n",
+    "    def __next__(self):\n",
+    "        # Protocolo de la iteración\n",
+    "        if self.puntero >= self.numero_robots:\n",
+    "            raise StopIteration\n",
+    "        robot = self.robots[self.puntero]\n",
+    "        self.puntero += 1\n",
+    "        return robot"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Funcionamiento\n",
+    "for robot in Fabrica(10):\n",
+    "    print(robot)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Ejemplos de Iterables\n",
+    "\n",
+    "+ Se analizan herramientas ya estudiadas en base a lo que ya se sabe sobre iterables.\n",
+    "\n",
+    "    + Enumeración\n",
+    "    + Rangos\n",
+    "    + Inverción\n",
+    "    + Compresión\n",
+    "    + Generadores\n",
+    "    + Listas\n",
+    "    + Tuplas\n",
+    "    + Strings\n",
+    "    + Diccionarios\n",
+    "    + Conjuntos\n",
+    "    + Archivos"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 26\n",
+    "# Enumeración\n",
+    "herramienta = enumerate([1, 2, 3])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(iter(herramienta) is not None) # es iterable\n",
+    "print(iter(herramienta) == herramienta) # es su propio iterador"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Enumerate retorna una tupla con el par indice, valor\n",
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta))\n",
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta)) # Error"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 27\n",
+    "# Rangos\n",
+    "herramienta = range(1, 4)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(iter(herramienta) is not None) # es iterable\n",
+    "print(iter(herramienta) == herramienta) # usa otro iterador"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "herr_iter = iter(herramienta)\n",
+    "print(herr_iter)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herr_iter))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herr_iter))\n",
+    "print(next(herr_iter))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herr_iter)) # Error"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 28\n",
+    "# Inversión\n",
+    "herramienta = reversed([1, 2, 3])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(iter(herramienta) is not None) # es iterable\n",
+    "print(iter(herramienta) == herramienta) # es su propio iterador\n",
+    "herr_iter = iter(herramienta)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(herramienta)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta))\n",
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta)) # Error"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 29\n",
+    "\n",
+    "herramienta = zip([1, 2], [3, 4])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(iter(herramienta) is not None) # es iterable\n",
+    "print(iter(herramienta) == herramienta) # es su propio iterador"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herr_iter)) # Error"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 30\n",
+    "# Generadores\n",
+    "def secuencia(n):\n",
+    "    for i in range(1, n+1):\n",
+    "        yield i\n",
+    "\n",
+    "herramienta = secuencia(3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(iter(herramienta) is not None) # es iterable\n",
+    "print(iter(herramienta) == herramienta) # es su propio iterador"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta))\n",
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(next(herramienta))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Otros Aspectos del Encapsulamiento\n",
+    "\n",
+    "+ El <span style=\"color:magenta\">encapsulamiento</span> permite agrupar datos y controlar su comportamiento en una clase. También permite controlar el acceso a los datos (atributos) y prevenir modificaciones no autorizadas.\n",
+    "\n",
+    "+ Si, por ejemplo, se desea controlar el acceso a una variable o ejecutar una acción adicional al intentar acceder a un atributo, se debe hacer con los métodos *getters* y *setters* o usar propiedades.\n",
+    "\n",
+    "#### Getters y Setters en Python\n",
+    "\n",
+    "+ Los <span style=\"color:magenta\">getters</span> son las funciones que nos permiten acceder a una variable privada. En Python se declaran creando una función con el decorador <span style=\"color:limegreen\">@property</span>, es decir una propiedad.\n",
+    "\n",
+    "+ Los <span style=\"color:magenta\">setters</span> son las funciones que usamos para sobreescribir la información de una variable y se generan definiendo un método con el nombre de la variable sin guiones y utilizando como decorador el nombre de la variable sin guiones más <span style=\"color:limegreen\">.setter</span>."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 31\n",
+    "# Encapsulamiento\n",
+    "\n",
+    "class ListadoBebidas():\n",
+    "\n",
+    "    def __init__(self):\n",
+    "        self.__bebida = 'Gin Tonic'\n",
+    "        self.__bebidas_validas = ['Gin Tonic', 'Cerveza', 'Fernando']\n",
+    "\n",
+    "    @property\n",
+    "    def bebida(self):\n",
+    "        return f'La bebida oficial es {self.__bebida}'\n",
+    "\n",
+    "    @bebida.setter\n",
+    "    def bebida(self, bebida):\n",
+    "        if bebida in self.__bebidas_validas:\n",
+    "            self.__bebida = bebida\n",
+    "        else:\n",
+    "            raise ValueError(f'La bebida {bebida} no está en el listado de bebidas válidas')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "if __name__ == \"__main__\":\n",
+    "    bebidas = ListadoBebidas()\n",
+    "    print(bebidas.bebida)\n",
+    "    bebidas.bebida = 'Fernando'\n",
+    "    print(bebidas.bebida)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo: POO 12\n",
+    "class Vehiculo():\n",
+    "    def __init__(self, nombre, color):\n",
+    "        self.__nombre = nombre\n",
+    "        self.color = color \n",
+    "        self.tamanio = \"grande\"\n",
+    "        self.aspecto = \"elegante\"\n",
+    "        print(f'Soy {nombre} y he sido creado')\n",
+    "    \n",
+    "    #define un método\n",
+    "    def __arrancar(self):\n",
+    "        print(f'Soy {self.__nombre}, tengo color {self.color} y he Arrancado')\n",
+    "\n",
+    "    @property\n",
+    "    def nombre(self):\n",
+    "        print('Dentro del getter')\n",
+    "        return f'El nombre es {self.__nombre}'\n",
+    "\n",
+    "    @nombre.setter\n",
+    "    def nombre(self, nombre):\n",
+    "        print('dentro del setter')\n",
+    "        self.__nombre = nombre"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Creación (instanciación) de un Objeto de tipo Vehiculo\n",
+    "automovil = Vehiculo('Honda', 'Azul') \n",
+    "print(automovil.nombre)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "automovil.nombre = 'Suzuki'\n",
+    "print(automovil.nombre)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Análisis del Ejemplo**\n",
+    "\n",
+    "+ En el ejemplo 11 se declaran dos variables, una llamada <span style=\"color:limegreen\">\\_bebida</span> y una lista llamada <span style=\"color:limegreen\">\\_bebidas\\_validas</span>. \n",
+    "\n",
+    "+ Para recuperar la información de la variable <span style=\"color:limegreen\">\\_bebida</span> se tiene que hacer con el objeto y el nombre de la función bebida. Como se aprecia, se puede manipular el resultado para mostrar la información como se desea.\n",
+    "\n",
+    "+ Para modificar el valor de la variable, se hace de la siguiente forma <span style=\"color:limegreen\">bebidas.bebida = 'Limonada'</span>, esto llamará al <span style=\"color:magenta\">setter</span> y se ejecutará la función. En el caso del ejemplo se dispara una excepción, ya que la bebida que se suministra no está en el listado de bebidas válidas."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.11"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

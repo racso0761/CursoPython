@@ -1,0 +1,17 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.useEnvironmentsExtension": true,
+        "python.defaultInterpreterPath": "/home/onasisi/Documentos/Python/CursoPython/Jupyter/Notebooks/.venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "python-envs.workspaceSearchPaths": [
+            "/home/onasisi/Documentos/Python/CursoPython/Jupyter/Notebooks/.venv"
+        ],
+        "jupyter.jupyterServerType": "local",
+        "jupyter.kernels.excludePythonEnvironments": []
+    }
+}
